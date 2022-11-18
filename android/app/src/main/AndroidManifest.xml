@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.papered">
+    package="com.yashrajjain.papered">
    <application
         android:label="papered"
         android:name="${applicationName}"

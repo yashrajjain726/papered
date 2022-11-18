@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "715039216150",
+    "project_id": "papered-74dc3",
+    "storage_bucket": "papered-74dc3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:715039216150:android:177832e30b0203ec1f1b37",
+        "android_client_info": {
+          "package_name": "com.yashrajjain.papered"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "715039216150-etadmavlneub0ms5u6hf1bm4l63stcd9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCzrw0OlstXOQf_nx203K2cTZcVBcGyQlY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "715039216150-etadmavlneub0ms5u6hf1bm4l63stcd9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
