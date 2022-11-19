@@ -4,6 +4,7 @@ import 'package:papered/pages/categories.dart';
 import 'package:papered/pages/favourite.dart';
 import 'package:papered/pages/home.dart';
 import 'package:papered/pages/search.dart';
+import 'package:papered/pages/settings.dart';
 import 'package:papered/providers/pagestate.dart';
 import 'package:papered/widgets/bottom_navigation_widget.dart';
 import 'package:provider/provider.dart';
@@ -22,7 +23,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  List<Widget> pages = const [Home(), Search(), Categories(), Favourite()];
+  List<Widget> pages = const [Home(), Categories(), Favourite(), Settings()];
   PageController controller = PageController();
 
   @override

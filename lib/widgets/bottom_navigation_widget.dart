@@ -32,10 +32,6 @@ class BottomNavigationWidget extends StatelessWidget {
             title: Text(""),
           ),
           SalomonBottomBarItem(
-            icon: Icon(Icons.search),
-            title: Text(""),
-          ),
-          SalomonBottomBarItem(
             icon: Icon(Icons.category),
             title: Text(""),
           ),
@@ -43,6 +39,10 @@ class BottomNavigationWidget extends StatelessWidget {
             icon: Icon(Icons.favorite_outline),
             title: Text(""),
           ),
+          SalomonBottomBarItem(
+            icon: Icon(Icons.settings),
+            title: Text(""),
+          )
         ],
       ),
     );
