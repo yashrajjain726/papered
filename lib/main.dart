@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:papered/pages/categories.dart';
 import 'package:papered/pages/favourite.dart';
@@ -7,7 +8,9 @@ import 'package:papered/providers/pagestate.dart';
 import 'package:papered/widgets/bottom_navigation_widget.dart';
 import 'package:provider/provider.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -19,7 +22,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  List<Widget> pages = [Home(), Search(), Categories(), Favourite()];
+  List<Widget> pages = const [Home(), Search(), Categories(), Favourite()];
   PageController controller = PageController();
 
   @override
