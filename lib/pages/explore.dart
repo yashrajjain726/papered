@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:papered/utils/on_search.dart';
 import 'package:papered/widgets/image_grid.dart';
 
 class Explore extends StatefulWidget {
@@ -20,7 +21,9 @@ class _ExploreState extends State<Explore> with AutomaticKeepAliveClientMixin {
     return SafeArea(
       child: Scaffold(
           floatingActionButton: FloatingActionButton(
-            onPressed: () {},
+            onPressed: () {
+              showSearch(context: context, delegate: OnSearch());
+            },
             backgroundColor: Colors.white,
             child: const Icon(
               Icons.search,
@@ -33,7 +36,7 @@ class _ExploreState extends State<Explore> with AutomaticKeepAliveClientMixin {
               Container(
                 padding: EdgeInsets.fromLTRB(0, 20, 20, 20),
                 margin: EdgeInsets.only(left: 20),
-                child: Text(
+                child: const Text(
                   "Papered",
                   style: TextStyle(
                       color: Colors.black,
