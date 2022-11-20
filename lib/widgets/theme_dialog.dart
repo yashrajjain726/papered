@@ -21,12 +21,12 @@ class _ThemeDialogState extends State<ThemeDialog> {
     final themeState = Provider.of<ThemeState>(context);
     return Dialog(
         child: ListView.builder(
-            physics: NeverScrollableScrollPhysics(),
+            physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
             itemCount: 3,
             itemBuilder: (context, index) {
               return ListTileTheme(
-                selectedColor: Theme.of(context).accentColor,
+                selectedColor: Theme.of(context).colorScheme.secondary,
                 child: ListTile(
                   leading: Icon(themeModeIcons[index]),
                   title: Text(themeModeText[index]),

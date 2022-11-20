@@ -24,17 +24,6 @@ class _CategoriesState extends State<Categories>
           body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            margin: const EdgeInsets.fromLTRB(30, 10, 0, 10),
-            child: const Text(
-              'Categories',
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 20,
-                fontWeight: FontWeight.w900,
-              ),
-            ),
-          ),
           Expanded(
             child: Stack(
               children: [

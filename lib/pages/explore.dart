@@ -33,17 +33,6 @@ class _ExploreState extends State<Explore> with AutomaticKeepAliveClientMixin {
           body: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                padding: EdgeInsets.fromLTRB(0, 20, 20, 20),
-                margin: EdgeInsets.only(left: 20),
-                child: const Text(
-                  "Papered",
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 22,
-                      fontWeight: FontWeight.w900),
-                ),
-              ),
               Expanded(
                 child: Stack(
                   children: [

@@ -71,14 +71,14 @@ class Settings extends StatelessWidget {
                   ),
                   title: const Text("Yashraj Jain"),
                   subtitle: const Text("App Developer"),
-                  trailing: Container(
+                  trailing: SizedBox(
                     width: 120.0,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         InkWell(
                             onTap: () async {
-                              final url = "https://github.com/yashrajjain726";
+                              const url = "https://github.com/yashrajjain726";
                               if (await canLaunch(url)) {
                                 await launch(url);
                               }
