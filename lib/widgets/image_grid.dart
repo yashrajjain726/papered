@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:papered/widgets/image_viewer.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 class ImageGrid extends StatelessWidget {
-  final image;
-  const ImageGrid({super.key, required this.image});
+  final data;
+  const ImageGrid({super.key, required this.data});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => ImageViewer(data: data)));
+      },
       child: Hero(
         tag: 'explore',
         child: Container(
@@ -19,7 +23,7 @@ class ImageGrid extends StatelessWidget {
             borderRadius: const BorderRadius.all(Radius.circular(15)),
             child: FadeInImage.memoryNetwork(
               placeholder: kTransparentImage,
-              image: image['img'],
+              image: data['img'],
               fit: BoxFit.cover,
             ),
           ),

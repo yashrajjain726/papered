@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:papered/widgets/categories_grid.dart';
 
 class Categories extends StatefulWidget {
@@ -17,6 +18,7 @@ class _CategoriesState extends State<Categories>
   @override
   Widget build(BuildContext context) {
     super.build(context);
+
     return SafeArea(
       child: Scaffold(
           body: Column(
@@ -49,18 +51,27 @@ class _CategoriesState extends State<Categories>
                           child: CircularProgressIndicator(),
                         );
                       }
-                      return GridView.count(
+                      return GridView.custom(
+                          gridDelegate: SliverStairedGridDelegate(
+                              crossAxisSpacing: 15,
+                              mainAxisSpacing: 15,
+                              startCrossAxisDirectionReversed: true,
+                              pattern: [
+                                const StairedGridTile(0.5, 1),
+                                const StairedGridTile(0.5, 3 / 4),
+                                const StairedGridTile(1.0, 10 / 4),
+                              ]),
                           physics: const BouncingScrollPhysics(),
-                          crossAxisCount: 1,
-                          crossAxisSpacing: 10,
-                          mainAxisSpacing: 10,
                           padding:
                               const EdgeInsets.fromLTRB(15.0, 15.0, 15.0, 0.0),
-                          children: snapshot.data!.docs
-                              .map((category) => CategoriesGrid(
-                                    category: category,
-                                  ))
-                              .toList());
+                          childrenDelegate: SliverChildBuilderDelegate(
+                            childCount: snapshot.data!.docs.length,
+                            (context, index) {
+                              return CategoriesGrid(
+                                category: snapshot.data!.docs[index],
+                              );
+                            },
+                          ));
                     })
               ],
             ),

@@ -11,16 +11,15 @@ class CategoriesGrid extends StatelessWidget {
       child: Container(
           decoration: BoxDecoration(
               color: Colors.transparent,
-              borderRadius: const BorderRadius.all(Radius.circular(60)),
+              borderRadius: const BorderRadius.all(Radius.circular(20)),
               image: DecorationImage(
-                  image: NetworkImage(category['bg_img']),
-                  fit: BoxFit.contain)),
+                  image: NetworkImage(category['bg_img']), fit: BoxFit.cover)),
           child: SizedBox(
             child: Stack(children: [
               Container(
                 decoration: const BoxDecoration(
                   color: Colors.black38,
-                  borderRadius: BorderRadius.all(Radius.circular(60)),
+                  borderRadius: BorderRadius.all(Radius.circular(20)),
                 ),
               ),
               Center(

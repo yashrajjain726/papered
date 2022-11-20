@@ -3,48 +3,47 @@ import 'package:papered/providers/pagestate.dart';
 import 'package:provider/provider.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
-class BottomNavigationWidget extends StatelessWidget {
-  final PageController pageController;
-  const BottomNavigationWidget({super.key, required this.pageController});
+class BottomNavigationWidget extends StatefulWidget {
+  final PageController controller;
+  const BottomNavigationWidget({super.key, required this.controller});
 
+  @override
+  State<BottomNavigationWidget> createState() => _BottomNavigationWidgetState();
+}
+
+class _BottomNavigationWidgetState extends State<BottomNavigationWidget> {
+  PageController controller = PageController();
   @override
   Widget build(BuildContext context) {
     final pageState = Provider.of<PageState>(context);
-    return Container(
-      margin: EdgeInsets.all(15),
-      decoration: BoxDecoration(
-        color: Colors.grey[200],
-        borderRadius: BorderRadius.circular(60),
-      ),
-      padding: EdgeInsets.all(8),
-      child: SalomonBottomBar(
-        currentIndex: pageState.currentPage,
-        onTap: (index) {
-          pageState.changePage(index);
-          pageController.jumpToPage(index);
-        },
-        selectedItemColor: Colors.red,
-        selectedColorOpacity: 0,
-        unselectedItemColor: Colors.grey[600],
-        items: [
-          SalomonBottomBarItem(
-            icon: Icon(Icons.home),
-            title: Text(""),
-          ),
-          SalomonBottomBarItem(
-            icon: Icon(Icons.category),
-            title: Text(""),
-          ),
-          SalomonBottomBarItem(
-            icon: Icon(Icons.favorite_outline),
-            title: Text(""),
-          ),
-          SalomonBottomBarItem(
-            icon: Icon(Icons.settings),
-            title: Text(""),
-          )
-        ],
-      ),
+    return SalomonBottomBar(
+      margin: const EdgeInsets.all(20),
+      currentIndex: pageState.currentPage,
+      onTap: (index) {
+        pageState.changePage(index);
+        widget.controller.jumpToPage(index);
+      },
+      selectedItemColor: Colors.red,
+      selectedColorOpacity: 0,
+      unselectedItemColor: Colors.grey[600],
+      items: [
+        SalomonBottomBarItem(
+          icon: const Icon(Icons.home),
+          title: const Text(""),
+        ),
+        SalomonBottomBarItem(
+          icon: const Icon(Icons.category),
+          title: const Text(""),
+        ),
+        SalomonBottomBarItem(
+          icon: const Icon(Icons.favorite_outline),
+          title: const Text(""),
+        ),
+        SalomonBottomBarItem(
+          icon: const Icon(Icons.settings),
+          title: const Text(""),
+        )
+      ],
     );
   }
 }
