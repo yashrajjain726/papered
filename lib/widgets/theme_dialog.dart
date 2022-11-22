@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:papered/providers/themestate.dart';
 import 'package:provider/provider.dart';
 
@@ -25,11 +26,14 @@ class _ThemeDialogState extends State<ThemeDialog> {
             shrinkWrap: true,
             itemCount: 3,
             itemBuilder: (context, index) {
-              return ListTileTheme(
-                selectedColor: Theme.of(context).colorScheme.secondary,
+              return Neumorphic(
+                style:
+                    NeumorphicStyle(color: Theme.of(context).backgroundColor),
                 child: ListTile(
                   leading: Icon(themeModeIcons[index]),
-                  title: Text(themeModeText[index]),
+                  title: Text(
+                    themeModeText[index],
+                  ),
                   selected: index == themeState.currentThemeIndex,
                   onTap: () {
                     themeState.changeThemeMode(index);

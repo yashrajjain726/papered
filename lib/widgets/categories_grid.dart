@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 class CategoriesGrid extends StatelessWidget {
   final category;
@@ -8,14 +9,17 @@ class CategoriesGrid extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {},
-      child: Container(
-          decoration: BoxDecoration(
-              color: Colors.transparent,
-              borderRadius: const BorderRadius.all(Radius.circular(20)),
-              image: DecorationImage(
-                  image: NetworkImage(category['bg_img']), fit: BoxFit.cover)),
-          child: SizedBox(
-            child: Stack(children: [
+      child: Neumorphic(
+          style: NeumorphicStyle(
+            boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(20)),
+          ),
+          child: Stack(
+            fit: StackFit.expand,
+            children: [
+              Image.network(
+                category['bg_img'],
+                fit: BoxFit.cover,
+              ),
               Container(
                 decoration: const BoxDecoration(
                   color: Colors.black38,
@@ -32,7 +36,7 @@ class CategoriesGrid extends StatelessWidget {
                       fontSize: 22),
                 ),
               ),
-            ]),
+            ],
           )),
     );
   }

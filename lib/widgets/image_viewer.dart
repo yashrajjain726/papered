@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:transparent_image/transparent_image.dart';
 
@@ -15,7 +16,6 @@ class _ImageViewerState extends State<ImageViewer> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       body: Hero(
           tag: widget.data['tag'],
           transitionOnUserGestures: true,
@@ -35,25 +35,27 @@ class _ImageViewerState extends State<ImageViewer> {
                   ),
                 )),
           ])),
-      floatingActionButton: SpeedDial(
-        animatedIcon: AnimatedIcons.menu_close,
-        backgroundColor: Colors.white,
-        foregroundColor: Colors.black,
-        overlayColor: Colors.transparent,
-        overlayOpacity: 0.8,
-        iconTheme: const IconThemeData(color: Colors.black),
+      floatingActionButton: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SpeedDialChild(
+          NeumorphicButton(
+            padding: EdgeInsets.all(15),
+            style: const NeumorphicStyle(boxShape: NeumorphicBoxShape.circle()),
             child: const Icon(
               Icons.download,
             ),
           ),
-          SpeedDialChild(
+          NeumorphicButton(
+            padding: EdgeInsets.all(15),
+            style: const NeumorphicStyle(boxShape: NeumorphicBoxShape.circle()),
             child: const Icon(
               Icons.wallpaper,
             ),
           ),
-          SpeedDialChild(
+          NeumorphicButton(
+            padding: EdgeInsets.all(15),
+            style: const NeumorphicStyle(boxShape: NeumorphicBoxShape.circle()),
             child: const Icon(
               Icons.favorite_outline,
             ),

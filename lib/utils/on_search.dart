@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:papered/pages/search.dart';
 
 class OnSearch extends SearchDelegate<String> {
@@ -6,6 +7,7 @@ class OnSearch extends SearchDelegate<String> {
   List<Widget>? buildActions(BuildContext context) {
     return [
       IconButton(
+          padding: const EdgeInsets.all(15),
           onPressed: () {
             query = "";
           },
@@ -16,6 +18,7 @@ class OnSearch extends SearchDelegate<String> {
   @override
   Widget? buildLeading(BuildContext context) {
     return IconButton(
+        padding: const EdgeInsets.all(15),
         onPressed: () {
           close(context, "result");
         },

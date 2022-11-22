@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:papered/pages/about.dart';
 import 'package:papered/pages/categories.dart';
 import 'package:papered/pages/explore.dart';
 import 'package:papered/pages/favourite.dart';
-import 'package:papered/pages/settings.dart';
 import 'package:papered/providers/pagestate.dart';
 import 'package:papered/widgets/bottom_navigation_widget.dart';
 import 'package:provider/provider.dart';
@@ -15,7 +15,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  List<Widget> pages = const [Explore(), Categories(), Favourite(), Settings()];
+  List<Widget> pages = const [Explore(), Categories(), Favourite(), About()];
 
   PageController controller = PageController();
   @override

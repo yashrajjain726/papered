@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:papered/utils/preferences.dart';
 
 class ThemeState extends ChangeNotifier {
@@ -11,7 +11,6 @@ class ThemeState extends ChangeNotifier {
   ];
   void getTheme() async {
     currentThemeMode = _themeModes[currentThemeIndex];
-    currentAccent = accentColors[currentAccentIndex];
     notifyListeners();
   }
 
@@ -22,40 +21,16 @@ class ThemeState extends ChangeNotifier {
     Preference().saveThemeIndex(index);
   }
 
-  ThemeData getDarkTheme() {
-    return ThemeData(
-      appBarTheme: const AppBarTheme(
-        color: Colors.black45,
+  NeumorphicThemeData getDarkTheme() {
+    return const NeumorphicThemeData(
+      baseColor: Colors.black,
+      depth: 8,
+      defaultTextColor: Colors.white,
+      iconTheme: IconThemeData(color: Colors.white),
+      appBarTheme: NeumorphicAppBarThemeData(
+        iconTheme: IconThemeData(color: Colors.white),
       ),
-      primaryColor: Colors.black45,
-      colorScheme: const ColorScheme.dark().copyWith(secondary: currentAccent),
+      accentColor: Colors.black,
     );
-  }
-
-  // For Accent colors
-  int currentAccentIndex = 0;
-  List<Color> accentColors = [
-    Colors.amber,
-    Colors.purple,
-    Colors.cyan,
-    Colors.greenAccent,
-    Colors.lime,
-    Colors.redAccent
-  ];
-  List<Text> accentTexts = [
-    const Text("Amber"),
-    const Text("Purple"),
-    const Text("Cyan"),
-    const Text("Green Accent"),
-    const Text("Lime"),
-    const Text("Red Accent")
-  ];
-  Color currentAccent = Colors.amber;
-
-  changeAccent(index) {
-    currentAccent = accentColors[index];
-    currentAccentIndex = index;
-    notifyListeners();
-    Preference().saveAccentIndex(index);
   }
 }

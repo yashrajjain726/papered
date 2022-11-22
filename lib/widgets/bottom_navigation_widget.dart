@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:papered/providers/pagestate.dart';
 import 'package:provider/provider.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
@@ -16,34 +17,60 @@ class _BottomNavigationWidgetState extends State<BottomNavigationWidget> {
   @override
   Widget build(BuildContext context) {
     final pageState = Provider.of<PageState>(context);
-    return SalomonBottomBar(
+    return Container(
       margin: const EdgeInsets.all(20),
-      currentIndex: pageState.currentPage,
-      onTap: (index) {
-        pageState.changePage(index);
-        widget.controller.jumpToPage(index);
-      },
-      selectedItemColor: Colors.red,
-      selectedColorOpacity: 0,
-      unselectedItemColor: Colors.grey[600],
-      items: [
-        SalomonBottomBarItem(
-          icon: const Icon(Icons.home),
-          title: const Text(""),
-        ),
-        SalomonBottomBarItem(
-          icon: const Icon(Icons.category),
-          title: const Text(""),
-        ),
-        SalomonBottomBarItem(
-          icon: const Icon(Icons.favorite_outline),
-          title: const Text(""),
-        ),
-        SalomonBottomBarItem(
-          icon: const Icon(Icons.settings),
-          title: const Text(""),
-        )
-      ],
+      width: MediaQuery.of(context).size.width,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: <Widget>[
+          NeumorphicRadio(
+              style: const NeumorphicRadioStyle(
+                  boxShape: NeumorphicBoxShape.circle()),
+              value: 0,
+              groupValue: pageState.currentPage,
+              onChanged: (value) {
+                pageState.changePage(value);
+              },
+              child: _buttonContainer(icon: const Icon(Icons.explore))),
+          NeumorphicRadio(
+              style: const NeumorphicRadioStyle(
+                  boxShape: NeumorphicBoxShape.circle()),
+              value: 1,
+              groupValue: pageState.currentPage,
+              onChanged: (value) {
+                pageState.changePage(value);
+              },
+              child: _buttonContainer(icon: const Icon(Icons.category))),
+          NeumorphicRadio(
+              style: const NeumorphicRadioStyle(
+                  boxShape: NeumorphicBoxShape.circle()),
+              value: 2,
+              groupValue: pageState.currentPage,
+              onChanged: (value) {
+                pageState.changePage(value);
+              },
+              child:
+                  _buttonContainer(icon: const Icon(Icons.favorite_outline))),
+          NeumorphicRadio(
+              style: const NeumorphicRadioStyle(
+                  boxShape: NeumorphicBoxShape.circle()),
+              value: 3,
+              groupValue: pageState.currentPage,
+              onChanged: (value) {
+                pageState.changePage(value);
+              },
+              child: _buttonContainer(icon: const Icon(Icons.info_sharp))),
+        ],
+      ),
+    );
+  }
+
+  _buttonContainer({required Icon icon}) {
+    return Container(
+      height: 50,
+      width: 50,
+      decoration: BoxDecoration(borderRadius: BorderRadius.circular(30)),
+      child: icon,
     );
   }
 }
