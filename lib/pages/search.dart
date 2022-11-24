@@ -17,6 +17,7 @@ class _SearchState extends State<Search> {
           child: NeumorphicText(
         "Search",
         textAlign: TextAlign.start,
+        textStyle: NeumorphicTextStyle(fontFamily: 'Orbitron'),
         style:
             NeumorphicStyle(color: Theme.of(context).textTheme.overline!.color),
       )),

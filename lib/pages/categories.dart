@@ -26,9 +26,10 @@ class _CategoriesState extends State<Categories>
             appBar: NeumorphicAppBar(
                 title: NeumorphicText(
               "Categories",
+              textStyle:
+                  NeumorphicTextStyle(fontFamily: 'Orbitron', fontSize: 24),
               style: NeumorphicStyle(
                   color: Theme.of(context).textTheme.overline!.color),
-              textStyle: NeumorphicTextStyle(),
             )),
             body: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -44,6 +45,8 @@ class _CategoriesState extends State<Categories>
                                 child: NeumorphicText(
                                   "Something went Wrong !!",
                                   textAlign: TextAlign.start,
+                                  textStyle: NeumorphicTextStyle(
+                                      fontFamily: 'Orbitron'),
                                   style: NeumorphicStyle(
                                       color: Theme.of(context)
                                           .textTheme
@@ -99,15 +102,16 @@ class _CategoriesState extends State<Categories>
                                                 color: Colors.transparent
                                                     .withOpacity(0.6)),
                                           ),
-                                          Text(
+                                          NeumorphicText(
                                             snapshot.data!.docs[index]
                                                 ['category_type'],
-                                            style: const TextStyle(
+                                            style: const NeumorphicStyle(
                                               color: Colors.white,
-                                              fontSize: 25,
-                                              fontFamily: 'DancingScript',
-                                              fontWeight: FontWeight.bold,
                                             ),
+                                            textStyle: NeumorphicTextStyle(
+                                                fontSize: 25,
+                                                fontWeight: FontWeight.bold,
+                                                fontFamily: 'Orbitron'),
                                           )
                                         ],
                                       ));

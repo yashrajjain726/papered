@@ -36,6 +36,7 @@ class OnSearch extends SearchDelegate<String> {
     return Center(
         child: NeumorphicText(
       "Search Image categories",
+      textStyle: NeumorphicTextStyle(fontFamily: 'Orbitron'),
       textAlign: TextAlign.start,
       style:
           NeumorphicStyle(color: Theme.of(context).textTheme.overline!.color),

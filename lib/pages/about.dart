@@ -19,6 +19,7 @@ class About extends StatelessWidget {
           ListTile(
             title: NeumorphicText(
               "Info",
+              textStyle: NeumorphicTextStyle(fontFamily: 'Orbitron'),
               style: NeumorphicStyle(
                   color: Theme.of(context).textTheme.overline!.color),
             ),
@@ -33,12 +34,14 @@ class About extends StatelessWidget {
               ),
               title: NeumorphicText(
                 "Yashraj Jain",
+                textStyle: NeumorphicTextStyle(fontFamily: 'Orbitron'),
                 textAlign: TextAlign.start,
                 style: NeumorphicStyle(
                     color: getcurrentThemeOppositeColor(context)),
               ),
               subtitle: NeumorphicText(
                 "App Developer",
+                textStyle: NeumorphicTextStyle(fontFamily: 'Orbitron'),
                 textAlign: TextAlign.start,
                 style: NeumorphicStyle(
                     color: getcurrentThemeOppositeColor(context)),

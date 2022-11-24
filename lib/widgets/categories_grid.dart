@@ -27,13 +27,16 @@ class CategoriesGrid extends StatelessWidget {
                 ),
               ),
               Center(
-                child: Text(
+                child: NeumorphicText(
                   category['category_type'],
                   textAlign: TextAlign.center,
-                  style: const TextStyle(
-                      color: Colors.white,
+                  textStyle: NeumorphicTextStyle(
+                      fontFamily: 'Orbitron',
                       fontWeight: FontWeight.bold,
                       fontSize: 22),
+                  style: const NeumorphicStyle(
+                    color: Colors.white,
+                  ),
                 ),
               ),
             ],

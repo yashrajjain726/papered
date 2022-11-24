@@ -12,17 +12,15 @@ class ImageGrid extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => ImageViewer(image: data['bg_img'])));
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => ImageViewer(image: data)));
       },
       child: Neumorphic(
         style: NeumorphicStyle(
             boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(30))),
         child: FadeInImage.memoryNetwork(
           placeholder: kTransparentImage,
-          image: data['bg_img'],
+          image: data,
           fit: BoxFit.cover,
         ),
       ),

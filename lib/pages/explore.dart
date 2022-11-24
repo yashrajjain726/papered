@@ -28,6 +28,8 @@ class _ExploreState extends State<Explore> with AutomaticKeepAliveClientMixin {
           appBar: NeumorphicAppBar(
             title: NeumorphicText(
               "Papered",
+              textStyle:
+                  NeumorphicTextStyle(fontFamily: 'Orbitron', fontSize: 24),
               style: NeumorphicStyle(
                   color: Theme.of(context).textTheme.overline!.color),
             ),
@@ -77,6 +79,8 @@ class _ExploreState extends State<Explore> with AutomaticKeepAliveClientMixin {
                           child: NeumorphicText(
                             "Something Went Wrong !!",
                             textAlign: TextAlign.start,
+                            textStyle:
+                                NeumorphicTextStyle(fontFamily: 'Orbitron'),
                             style: NeumorphicStyle(
                                 color: Theme.of(context)
                                     .textTheme
@@ -106,7 +110,8 @@ class _ExploreState extends State<Explore> with AutomaticKeepAliveClientMixin {
                         childrenDelegate: SliverChildBuilderDelegate(
                             childCount: snapshot.data!.docs.length,
                             (context, index) {
-                          return ImageGrid(data: snapshot.data!.docs[index]);
+                          return ImageGrid(
+                              data: snapshot.data!.docs[index]['bg_img']);
                         }),
                         padding:
                             const EdgeInsets.fromLTRB(12.0, 12.0, 12.0, 0.0),

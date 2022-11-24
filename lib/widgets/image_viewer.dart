@@ -1,6 +1,8 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:flutter_wallpaper_manager/flutter_wallpaper_manager.dart';
 import 'package:papered/providers/favoritestate.dart';
 import 'package:papered/utils/preferences.dart';
 import 'package:papered/utils/utils.dart';
@@ -19,9 +21,144 @@ class _ImageViewerState extends State<ImageViewer> {
   double angle = 0.0;
   Preference preference = Preference();
 
+  downloadImage() async {}
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
+  void setWallpaperDialog() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return Dialog(
+          backgroundColor: getcurrentThemeColor(context),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: NeumorphicText(
+                  'Set wallpaper',
+                  textAlign: TextAlign.start,
+                  style: NeumorphicStyle(
+                      color: getcurrentThemeOppositeColor(context)),
+                ),
+              ),
+              ListTile(
+                title: NeumorphicText(
+                  'Home Screen',
+                  textStyle: NeumorphicTextStyle(
+                    fontFamily: 'Orbitron',
+                  ),
+                  textAlign: TextAlign.start,
+                  style: NeumorphicStyle(
+                      color: getcurrentThemeOppositeColor(context)),
+                ),
+                leading: NeumorphicIcon(
+                  Icons.home,
+                  style: NeumorphicStyle(
+                      color: getcurrentThemeOppositeColor(context)),
+                ),
+                onTap: () {
+                  setWallpaper(1);
+                  Navigator.pop(context);
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content: NeumorphicText(
+                    'Setting Wallpaper',
+                    textStyle: NeumorphicTextStyle(
+                      fontFamily: 'Orbitron',
+                    ),
+                  )));
+                },
+              ),
+              ListTile(
+                title: NeumorphicText(
+                  'Lock Screen',
+                  textAlign: TextAlign.start,
+                  style: NeumorphicStyle(
+                      color: getcurrentThemeOppositeColor(context)),
+                ),
+                leading: NeumorphicIcon(
+                  Icons.lock,
+                  style: NeumorphicStyle(
+                      color: getcurrentThemeOppositeColor(context)),
+                ),
+                onTap: () {
+                  setWallpaper(2);
+                  Navigator.pop(context);
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content: NeumorphicText(
+                    'Setting Wallpaper',
+                    textStyle: NeumorphicTextStyle(
+                      fontFamily: 'Orbitron',
+                    ),
+                  )));
+                },
+              ),
+              ListTile(
+                title: NeumorphicText(
+                  'Both',
+                  textStyle: NeumorphicTextStyle(
+                    fontFamily: 'Orbitron',
+                  ),
+                  textAlign: TextAlign.start,
+                  style: NeumorphicStyle(
+                      color: getcurrentThemeOppositeColor(context)),
+                ),
+                leading: NeumorphicIcon(
+                  Icons.phone_android,
+                  style: NeumorphicStyle(
+                      color: getcurrentThemeOppositeColor(context)),
+                ),
+                onTap: () {
+                  setWallpaper(3);
+                  Navigator.pop(context);
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content: NeumorphicText(
+                    'Setting Wallpaper',
+                    textStyle: NeumorphicTextStyle(
+                      fontFamily: 'Orbitron',
+                    ),
+                  )));
+                },
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  Future<void> setWallpaper(int type) async {
+    bool result;
+    var file = await DefaultCacheManager().getSingleFile(widget.image);
+    try {
+      if (type == 1) {
+        result = await WallpaperManager.setWallpaperFromFile(
+            file.path, WallpaperManager.HOME_SCREEN);
+      } else if (type == 2) {
+        result = await WallpaperManager.setWallpaperFromFile(
+            file.path, WallpaperManager.LOCK_SCREEN);
+      } else if (type == 3) {
+        result = await WallpaperManager.setWallpaperFromFile(
+            file.path, WallpaperManager.BOTH_SCREEN);
+      }
+    } on PlatformException catch (e) {
+      if (kDebugMode) {
+        print(e);
+      }
+    }
+    ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Wallpaper set successfully')));
+  }
+
   @override
   Widget build(BuildContext context) {
     final favoriteProvider = Provider.of<FavoriteState>(context, listen: true);
+
     return Scaffold(
       body: Hero(
           tag: '',
@@ -47,7 +184,7 @@ class _ImageViewerState extends State<ImageViewer> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           NeumorphicButton(
-            onPressed: () {},
+            onPressed: downloadImage,
             padding: const EdgeInsets.all(15),
             style: const NeumorphicStyle(boxShape: NeumorphicBoxShape.circle()),
             child: NeumorphicIcon(
@@ -56,7 +193,7 @@ class _ImageViewerState extends State<ImageViewer> {
             ),
           ),
           NeumorphicButton(
-            onPressed: () {},
+            onPressed: setWallpaperDialog,
             padding: const EdgeInsets.all(15),
             style: const NeumorphicStyle(boxShape: NeumorphicBoxShape.circle()),
             child: NeumorphicIcon(
