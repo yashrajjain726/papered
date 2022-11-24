@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:papered/widgets/image_viewer.dart';
@@ -11,15 +12,17 @@ class ImageGrid extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => ImageViewer(data: data)));
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => ImageViewer(image: data['bg_img'])));
       },
       child: Neumorphic(
         style: NeumorphicStyle(
             boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(30))),
         child: FadeInImage.memoryNetwork(
           placeholder: kTransparentImage,
-          image: data['img'],
+          image: data['bg_img'],
           fit: BoxFit.cover,
         ),
       ),

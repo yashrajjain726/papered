@@ -1,11 +1,15 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
-import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'package:papered/providers/favoritestate.dart';
+import 'package:papered/utils/preferences.dart';
+import 'package:papered/utils/utils.dart';
+import 'package:provider/provider.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 class ImageViewer extends StatefulWidget {
-  final data;
-  const ImageViewer({super.key, required this.data});
+  final String image;
+  const ImageViewer({super.key, required this.image});
 
   @override
   State<ImageViewer> createState() => _ImageViewerState();
@@ -13,11 +17,14 @@ class ImageViewer extends StatefulWidget {
 
 class _ImageViewerState extends State<ImageViewer> {
   double angle = 0.0;
+  Preference preference = Preference();
+
   @override
   Widget build(BuildContext context) {
+    final favoriteProvider = Provider.of<FavoriteState>(context, listen: true);
     return Scaffold(
       body: Hero(
-          tag: widget.data['tag'],
+          tag: '',
           transitionOnUserGestures: true,
           child: Stack(children: [
             Container(
@@ -29,7 +36,7 @@ class _ImageViewerState extends State<ImageViewer> {
                     angle: angle,
                     child: FadeInImage.memoryNetwork(
                       placeholder: kTransparentImage,
-                      image: widget.data['img'],
+                      image: widget.image,
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -40,6 +47,7 @@ class _ImageViewerState extends State<ImageViewer> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           NeumorphicButton(
+            onPressed: () {},
             padding: const EdgeInsets.all(15),
             style: const NeumorphicStyle(boxShape: NeumorphicBoxShape.circle()),
             child: NeumorphicIcon(
@@ -48,6 +56,7 @@ class _ImageViewerState extends State<ImageViewer> {
             ),
           ),
           NeumorphicButton(
+            onPressed: () {},
             padding: const EdgeInsets.all(15),
             style: const NeumorphicStyle(boxShape: NeumorphicBoxShape.circle()),
             child: NeumorphicIcon(
@@ -57,10 +66,21 @@ class _ImageViewerState extends State<ImageViewer> {
           ),
           NeumorphicButton(
             padding: const EdgeInsets.all(15),
-            style: const NeumorphicStyle(boxShape: NeumorphicBoxShape.circle()),
+            onPressed: () {
+              Provider.of<FavoriteState>(context, listen: false)
+                  .updateFavoriteList(widget.image);
+              preference.toggleFavorite(widget.image);
+            },
+            style: const NeumorphicStyle(
+              boxShape: NeumorphicBoxShape.circle(),
+            ),
             child: NeumorphicIcon(
-              Icons.favorite_outline,
-              style: NeumorphicStyle(color: Theme.of(context).iconTheme.color),
+              favoriteProvider.checkIsFavoriteImage(widget.image)
+                  ? Icons.favorite
+                  : Icons.favorite_border,
+              style: NeumorphicStyle(
+                color: Theme.of(context).iconTheme.color,
+              ),
             ),
           ),
         ],
