@@ -40,24 +40,27 @@ class _ImageViewerState extends State<ImageViewer> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           NeumorphicButton(
-            padding: EdgeInsets.all(15),
+            padding: const EdgeInsets.all(15),
             style: const NeumorphicStyle(boxShape: NeumorphicBoxShape.circle()),
-            child: const Icon(
+            child: NeumorphicIcon(
               Icons.download,
+              style: NeumorphicStyle(color: Theme.of(context).iconTheme.color),
             ),
           ),
           NeumorphicButton(
-            padding: EdgeInsets.all(15),
+            padding: const EdgeInsets.all(15),
             style: const NeumorphicStyle(boxShape: NeumorphicBoxShape.circle()),
-            child: const Icon(
+            child: NeumorphicIcon(
               Icons.wallpaper,
+              style: NeumorphicStyle(color: Theme.of(context).iconTheme.color),
             ),
           ),
           NeumorphicButton(
-            padding: EdgeInsets.all(15),
+            padding: const EdgeInsets.all(15),
             style: const NeumorphicStyle(boxShape: NeumorphicBoxShape.circle()),
-            child: const Icon(
+            child: NeumorphicIcon(
               Icons.favorite_outline,
+              style: NeumorphicStyle(color: Theme.of(context).iconTheme.color),
             ),
           ),
         ],

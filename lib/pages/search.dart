@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 class Search extends StatefulWidget {
   final query;
@@ -11,8 +12,14 @@ class Search extends StatefulWidget {
 class _SearchState extends State<Search> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(child: Text("Search")),
+    return Scaffold(
+      body: Center(
+          child: NeumorphicText(
+        "Search",
+        textAlign: TextAlign.start,
+        style:
+            NeumorphicStyle(color: Theme.of(context).textTheme.overline!.color),
+      )),
     );
   }
 }

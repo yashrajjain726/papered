@@ -23,14 +23,21 @@ class ThemeState extends ChangeNotifier {
 
   NeumorphicThemeData getDarkTheme() {
     return const NeumorphicThemeData(
-      baseColor: Colors.black,
+      textTheme: TextTheme(overline: TextStyle(color: Colors.white)),
+      baseColor: Colors.black45,
       depth: 8,
       defaultTextColor: Colors.white,
+      shadowLightColor: Colors.black,
+      shadowDarkColor: Colors.black,
       iconTheme: IconThemeData(color: Colors.white),
       appBarTheme: NeumorphicAppBarThemeData(
+        color: Colors.black,
+        textStyle: TextStyle(
+          color: Colors.white,
+        ),
         iconTheme: IconThemeData(color: Colors.white),
       ),
-      accentColor: Colors.black,
+      accentColor: Colors.green,
     );
   }
 }

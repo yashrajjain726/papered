@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:papered/providers/themestate.dart';
+import 'package:papered/utils/utils.dart';
 import 'package:provider/provider.dart';
 
 class ThemeDialog extends StatefulWidget {
@@ -26,20 +27,24 @@ class _ThemeDialogState extends State<ThemeDialog> {
             shrinkWrap: true,
             itemCount: 3,
             itemBuilder: (context, index) {
-              return Neumorphic(
-                style:
-                    NeumorphicStyle(color: Theme.of(context).backgroundColor),
-                child: ListTile(
-                  leading: Icon(themeModeIcons[index]),
-                  title: Text(
-                    themeModeText[index],
-                  ),
-                  selected: index == themeState.currentThemeIndex,
-                  onTap: () {
-                    themeState.changeThemeMode(index);
-                    Navigator.pop(context);
-                  },
+              return ListTile(
+                textColor: getcurrentThemeOppositeColor(context),
+                iconColor: getcurrentThemeOppositeColor(context),
+                selectedColor: getcurrentThemeColor(context),
+                selectedTileColor: getcurrentThemeOppositeColor(context),
+                tileColor: getcurrentThemeColor(context),
+                leading: Icon(
+                  themeModeIcons[index],
                 ),
+                title: Text(
+                  themeModeText[index],
+                  textAlign: TextAlign.start,
+                ),
+                selected: index == themeState.currentThemeIndex,
+                onTap: () {
+                  themeState.changeThemeMode(index);
+                  Navigator.pop(context);
+                },
               );
             }));
   }

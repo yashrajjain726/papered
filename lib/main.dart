@@ -35,9 +35,12 @@ class _MyAppState extends State<MyApp> {
           debugShowCheckedModeBanner: false,
           themeMode: themeState.currentThemeMode,
           theme: const NeumorphicThemeData(
+            textTheme: TextTheme(overline: TextStyle(color: Colors.black)),
             baseColor: Color(0xffE0E0E0),
             depth: 8,
             defaultTextColor: Colors.black,
+            shadowDarkColor: Colors.black,
+            shadowLightColor: Colors.white,
             iconTheme: IconThemeData(color: Colors.black),
             appBarTheme: NeumorphicAppBarThemeData(
               iconTheme: IconThemeData(

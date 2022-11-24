@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:papered/pages/search.dart';
+import 'package:papered/utils/utils.dart';
 
 class OnSearch extends SearchDelegate<String> {
   @override
@@ -33,6 +33,44 @@ class OnSearch extends SearchDelegate<String> {
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    return const Center(child: Text("Search Image categories"));
+    return Center(
+        child: NeumorphicText(
+      "Search Image categories",
+      textAlign: TextAlign.start,
+      style:
+          NeumorphicStyle(color: Theme.of(context).textTheme.overline!.color),
+    ));
+  }
+
+  @override
+  ThemeData appBarTheme(BuildContext context) {
+    return ThemeData(
+        hintColor: getcurrentThemeOppositeColor(context),
+        accentTextTheme: Theme.of(context).textTheme,
+        bottomAppBarColor: getcurrentThemeColor(context),
+        textTheme: TextTheme(
+            headline6: TextStyle(color: getcurrentThemeOppositeColor(context))),
+        backgroundColor: getcurrentThemeColor(context),
+        scaffoldBackgroundColor: getcurrentThemeColor(context),
+        indicatorColor: getcurrentThemeOppositeColor(context),
+        inputDecorationTheme: InputDecorationTheme(
+            prefixIconColor: getcurrentThemeOppositeColor(context),
+            suffixIconColor: getcurrentThemeOppositeColor(context)),
+        textSelectionTheme: TextSelectionThemeData(
+            selectionColor:
+                getcurrentThemeOppositeColor(context).withOpacity(0.5),
+            selectionHandleColor: getcurrentThemeOppositeColor(context)),
+        appBarTheme: AppBarTheme(
+          textTheme: TextTheme(
+              headline6: TextStyle(
+                  color: getcurrentThemeOppositeColor(
+            context,
+          ))),
+          iconTheme: Theme.of(context).iconTheme,
+          titleTextStyle: TextStyle(
+              color: getcurrentThemeOppositeColor(context),
+              backgroundColor: getcurrentThemeColor(context)),
+          backgroundColor: getcurrentThemeColor(context),
+        ));
   }
 }

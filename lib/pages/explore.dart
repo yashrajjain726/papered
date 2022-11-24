@@ -25,43 +25,64 @@ class _ExploreState extends State<Explore> with AutomaticKeepAliveClientMixin {
     super.build(context);
     return SafeArea(
       child: Scaffold(
-          floatingActionButton: NeumorphicButton(
-            padding: const EdgeInsets.all(15),
-            style: const NeumorphicStyle(boxShape: NeumorphicBoxShape.circle()),
-            onPressed: () {
-              showSearch(context: context, delegate: OnSearch());
-            },
-            child: const Icon(Icons.search),
-          ),
-          body: Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              NeumorphicButton(
-                padding: const EdgeInsets.all(15),
-                style: const NeumorphicStyle(
-                    boxShape: NeumorphicBoxShape.circle()),
-                onPressed: () {
+          appBar: NeumorphicAppBar(
+            title: NeumorphicText(
+              "Papered",
+              style: NeumorphicStyle(
+                  color: Theme.of(context).textTheme.overline!.color),
+            ),
+            actions: [
+              GestureDetector(
+                onTap: () {
                   showDialog(
                       context: context,
                       builder: (context) {
                         return const ThemeDialog();
                       });
                 },
-                child: NeumorphicButton(
-                  padding: EdgeInsets.zero,
-                  child: const Icon(
+                child: Padding(
+                  padding: const EdgeInsets.all(15),
+                  child: NeumorphicIcon(
                     Icons.brightness_4,
+                    style: NeumorphicStyle(
+                        color: Theme.of(context).iconTheme.color),
                   ),
                 ),
               ),
+              GestureDetector(
+                onTap: () {
+                  showSearch(context: context, delegate: OnSearch());
+                },
+                child: Padding(
+                  padding: const EdgeInsets.all(15),
+                  child: NeumorphicIcon(
+                    Icons.search,
+                    style: NeumorphicStyle(
+                        color: Theme.of(context).iconTheme.color),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          body: Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
               Expanded(
                 child: StreamBuilder<QuerySnapshot>(
                     stream: _exploreStream,
                     builder: (context, snapshot) {
                       if (snapshot.hasError) {
-                        return const Center(
-                          child: Text("Something Went Wrong"),
+                        return Center(
+                          child: NeumorphicText(
+                            "Something Went Wrong !!",
+                            textAlign: TextAlign.start,
+                            style: NeumorphicStyle(
+                                color: Theme.of(context)
+                                    .textTheme
+                                    .overline!
+                                    .color),
+                          ),
                         );
                       }
                       if (snapshot.connectionState == ConnectionState.waiting) {
@@ -70,16 +91,17 @@ class _ExploreState extends State<Explore> with AutomaticKeepAliveClientMixin {
                         );
                       }
                       return GridView.custom(
-                        gridDelegate: SliverQuiltedGridDelegate(
+                        gridDelegate: SliverWovenGridDelegate.count(
                             crossAxisCount: 2,
-                            crossAxisSpacing: 10,
-                            mainAxisSpacing: 12,
-                            repeatPattern: QuiltedGridRepeatPattern.inverted,
+                            mainAxisSpacing: 0,
+                            crossAxisSpacing: 0,
                             pattern: const [
-                              QuiltedGridTile(2, 2),
-                              QuiltedGridTile(1, 1),
-                              QuiltedGridTile(1, 1),
-                              QuiltedGridTile(1, 2),
+                              WovenGridTile(1),
+                              WovenGridTile(
+                                5 / 7,
+                                crossAxisRatio: 0.9,
+                                alignment: AlignmentDirectional.centerEnd,
+                              ),
                             ]),
                         childrenDelegate: SliverChildBuilderDelegate(
                             childCount: snapshot.data!.docs.length,
