@@ -1,9 +1,13 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
+import 'dart:math';
+
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:papered/providers/themestate.dart';
+import 'package:papered/models/imagemodel.dart';
+import 'package:papered/providers/categorystate.dart';
+import 'package:papered/providers/explorestate.dart';
+import 'package:papered/services/api.dart';
 import 'package:papered/utils/on_search.dart';
+import 'package:papered/utils/utils.dart';
 import 'package:papered/widgets/image_grid.dart';
 import 'package:papered/widgets/theme_dialog.dart';
 import 'package:provider/provider.dart';
@@ -16,12 +20,52 @@ class Explore extends StatefulWidget {
 }
 
 class _ExploreState extends State<Explore> with AutomaticKeepAliveClientMixin {
-  final Stream<QuerySnapshot> _exploreStream =
-      FirebaseFirestore.instance.collection('explore').snapshots();
   ScrollController controller = ScrollController();
+  final APIService apiService = APIService();
+
+  @override
+  void initState() {
+    super.initState();
+    var page = Provider.of<ExploreState>(context, listen: false).page;
+    String category = getRandomCategory();
+
+    controller = ScrollController(initialScrollOffset: 5.0)
+      ..addListener(() {
+        if (controller.offset >= controller.position.maxScrollExtent &&
+            !controller.position.outOfRange) {
+          Provider.of<ExploreState>(context, listen: false).updatePage(page++);
+          getDataFromAPI(category);
+        }
+      });
+    getDataFromAPI(category);
+  }
+
+  String getRandomCategory() {
+    List<String> categoryList = [];
+    categories().forEach((category) {
+      categoryList.add(category.label);
+    });
+    int randomIndex = Random().nextInt(categoryList.length);
+    return categoryList[randomIndex];
+  }
+
+  getDataFromAPI(category) async {
+    var images = await apiService.getRandomWallpaper("20", category,
+        Provider.of<ExploreState>(context, listen: false).page.toString());
+    images.photos!.forEach((image) {
+      Provider.of<ExploreState>(context, listen: false).addDatatoExplore(image);
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    controller.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    var themeState = Provider.of<ThemeState>(context);
+    var exploreState = Provider.of<ExploreState>(context, listen: true);
     super.build(context);
     return SafeArea(
       child: Scaffold(
@@ -71,54 +115,26 @@ class _ExploreState extends State<Explore> with AutomaticKeepAliveClientMixin {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Expanded(
-                child: StreamBuilder<QuerySnapshot>(
-                    stream: _exploreStream,
-                    builder: (context, snapshot) {
-                      if (snapshot.hasError) {
-                        return Center(
-                          child: NeumorphicText(
-                            "Something Went Wrong !!",
-                            textAlign: TextAlign.start,
-                            textStyle:
-                                NeumorphicTextStyle(fontFamily: 'Orbitron'),
-                            style: NeumorphicStyle(
-                                color: Theme.of(context)
-                                    .textTheme
-                                    .overline!
-                                    .color),
-                          ),
-                        );
-                      }
-                      if (snapshot.connectionState == ConnectionState.waiting) {
-                        return const Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      }
-                      return GridView.custom(
-                        gridDelegate: SliverWovenGridDelegate.count(
-                            crossAxisCount: 2,
-                            mainAxisSpacing: 0,
-                            crossAxisSpacing: 0,
-                            pattern: const [
-                              WovenGridTile(1),
-                              WovenGridTile(
-                                5 / 7,
-                                crossAxisRatio: 0.9,
-                                alignment: AlignmentDirectional.centerEnd,
-                              ),
-                            ]),
-                        childrenDelegate: SliverChildBuilderDelegate(
-                            childCount: snapshot.data!.docs.length,
-                            (context, index) {
-                          return ImageGrid(
-                              data: snapshot.data!.docs[index]['bg_img']);
-                        }),
-                        padding:
-                            const EdgeInsets.fromLTRB(12.0, 12.0, 12.0, 0.0),
-                        controller: controller,
-                      );
-                    }),
-              ),
+                  child: GridView.custom(
+                gridDelegate: SliverWovenGridDelegate.count(
+                    crossAxisCount: 2,
+                    mainAxisSpacing: 0,
+                    crossAxisSpacing: 0,
+                    pattern: const [
+                      WovenGridTile(1),
+                      WovenGridTile(
+                        5 / 7,
+                        crossAxisRatio: 0.9,
+                        alignment: AlignmentDirectional.centerEnd,
+                      ),
+                    ]),
+                childrenDelegate: SliverChildBuilderDelegate(
+                    childCount: exploreState.data.length, (context, index) {
+                  return ImageGrid(data: exploreState.data[index].src!.large2x);
+                }),
+                padding: const EdgeInsets.fromLTRB(12.0, 12.0, 12.0, 0.0),
+                controller: controller,
+              )),
             ],
           )),
     );

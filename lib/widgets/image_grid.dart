@@ -1,8 +1,9 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:papered/widgets/image_viewer.dart';
 import 'package:transparent_image/transparent_image.dart';
+
+import '../models/imagemodel.dart';
 
 class ImageGrid extends StatelessWidget {
   final data;

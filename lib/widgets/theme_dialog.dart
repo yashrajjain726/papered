@@ -36,12 +36,10 @@ class _ThemeDialogState extends State<ThemeDialog> {
                 leading: Icon(
                   themeModeIcons[index],
                 ),
-                title: NeumorphicText(
+                title: Text(
                   themeModeText[index],
                   textAlign: TextAlign.start,
-                  textStyle: NeumorphicTextStyle(
-                    fontFamily: 'Orbitron',
-                  ),
+                  style: TextStyle(fontFamily: 'Orbitron'),
                 ),
                 selected: index == themeState.currentThemeIndex,
                 onTap: () {

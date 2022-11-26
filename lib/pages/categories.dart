@@ -1,9 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:papered/widgets/categories_grid.dart';
+import 'package:papered/models/categorymodel.dart';
+import 'package:papered/providers/categorystate.dart';
+import 'package:papered/services/api.dart';
+import 'package:papered/utils/utils.dart';
+import 'package:provider/provider.dart';
 
 class Categories extends StatefulWidget {
   const Categories({super.key});
@@ -14,11 +15,17 @@ class Categories extends StatefulWidget {
 
 class _CategoriesState extends State<Categories>
     with AutomaticKeepAliveClientMixin {
-  final Stream<QuerySnapshot> _categoryStream =
-      FirebaseFirestore.instance.collection('categories').snapshots();
+  final APIService apiService = APIService();
+  @override
+  void initState() {
+    super.initState();
+    Provider.of<CategoryState>(context, listen: false)
+        .updateCategoriesList(categories());
+  }
 
   @override
   Widget build(BuildContext context) {
+    var categoryProvider = Provider.of<CategoryState>(context, listen: true);
     super.build(context);
 
     return SafeArea(
@@ -37,85 +44,54 @@ class _CategoriesState extends State<Categories>
                 Expanded(
                   child: Stack(
                     children: [
-                      StreamBuilder<QuerySnapshot>(
-                          stream: _categoryStream,
-                          builder: (context, snapshot) {
-                            if (snapshot.hasError) {
-                              return Center(
-                                child: NeumorphicText(
-                                  "Something went Wrong !!",
-                                  textAlign: TextAlign.start,
-                                  textStyle: NeumorphicTextStyle(
-                                      fontFamily: 'Orbitron'),
-                                  style: NeumorphicStyle(
-                                      color: Theme.of(context)
-                                          .textTheme
-                                          .overline!
-                                          .color),
-                                ),
-                              );
-                            }
-                            if (snapshot.connectionState ==
-                                ConnectionState.waiting) {
-                              return const Center(
-                                child: CircularProgressIndicator(),
-                              );
-                            }
-                            return GridView.builder(
-                                gridDelegate:
-                                    const SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 1,
-                                  childAspectRatio: 3.6,
-                                  crossAxisSpacing: 2,
-                                  mainAxisSpacing: 4,
-                                ),
-                                itemCount: snapshot.data!.docs.length,
-                                itemBuilder: (context, index) {
-                                  return Neumorphic(
-                                      margin: const EdgeInsets.fromLTRB(
-                                          10, 2, 10, 2),
-                                      style: NeumorphicStyle(
-                                          boxShape:
-                                              NeumorphicBoxShape.roundRect(
-                                                  BorderRadius.circular(20))),
-                                      child: Stack(
-                                        alignment: Alignment.center,
-                                        children: [
-                                          Container(
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(20),
-                                              image: DecorationImage(
-                                                fit: BoxFit.cover,
-                                                image:
-                                                    CachedNetworkImageProvider(
-                                                        snapshot.data!
-                                                                .docs[index]
-                                                            ['bg_img']),
-                                              ),
-                                            ),
-                                          ),
-                                          Container(
-                                            decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(20),
-                                                color: Colors.transparent
-                                                    .withOpacity(0.6)),
-                                          ),
-                                          NeumorphicText(
-                                            snapshot.data!.docs[index]
-                                                ['category_type'],
-                                            style: const NeumorphicStyle(
-                                              color: Colors.white,
-                                            ),
-                                            textStyle: NeumorphicTextStyle(
-                                                fontSize: 25,
-                                                fontWeight: FontWeight.bold,
-                                                fontFamily: 'Orbitron'),
-                                          )
-                                        ],
-                                      ));
-                                });
+                      GridView.builder(
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 1,
+                            childAspectRatio: 3.6,
+                            crossAxisSpacing: 2,
+                            mainAxisSpacing: 4,
+                          ),
+                          itemCount: categoryProvider.data.length,
+                          itemBuilder: (context, index) {
+                            return Neumorphic(
+                                margin: const EdgeInsets.fromLTRB(10, 2, 10, 2),
+                                style: NeumorphicStyle(
+                                    boxShape: NeumorphicBoxShape.roundRect(
+                                        BorderRadius.circular(20))),
+                                child: Stack(
+                                  alignment: Alignment.center,
+                                  children: [
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(20),
+                                        image: DecorationImage(
+                                          fit: BoxFit.cover,
+                                          image: CachedNetworkImageProvider(
+                                              categoryProvider
+                                                  .data[index].imageUrl),
+                                        ),
+                                      ),
+                                    ),
+                                    Container(
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(20),
+                                          color: Colors.transparent
+                                              .withOpacity(0.6)),
+                                    ),
+                                    NeumorphicText(
+                                      categoryProvider.data[index].label,
+                                      style: const NeumorphicStyle(
+                                        color: Colors.white,
+                                      ),
+                                      textStyle: NeumorphicTextStyle(
+                                          fontSize: 25,
+                                          fontWeight: FontWeight.bold,
+                                          fontFamily: 'Orbitron'),
+                                    )
+                                  ],
+                                ));
                           })
                     ],
                   ),
