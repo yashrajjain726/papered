@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:papered/models/categorymodel.dart';
+import 'package:papered/pages/search.dart';
 import 'package:papered/providers/categorystate.dart';
 import 'package:papered/services/api.dart';
 import 'package:papered/utils/utils.dart';
@@ -59,38 +60,47 @@ class _CategoriesState extends State<Categories>
                                 style: NeumorphicStyle(
                                     boxShape: NeumorphicBoxShape.roundRect(
                                         BorderRadius.circular(20))),
-                                child: Stack(
-                                  alignment: Alignment.center,
-                                  children: [
-                                    Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(20),
-                                        image: DecorationImage(
-                                          fit: BoxFit.cover,
-                                          image: CachedNetworkImageProvider(
-                                              categoryProvider
-                                                  .data[index].imageUrl),
-                                        ),
-                                      ),
-                                    ),
-                                    Container(
-                                      decoration: BoxDecoration(
+                                child: InkWell(
+                                  onTap: () {
+                                    MaterialPageRoute(
+                                        builder: (context) => Search(
+                                            query: categoryProvider
+                                                .data[index].label));
+                                  },
+                                  child: Stack(
+                                    alignment: Alignment.center,
+                                    children: [
+                                      Container(
+                                        decoration: BoxDecoration(
                                           borderRadius:
                                               BorderRadius.circular(20),
-                                          color: Colors.transparent
-                                              .withOpacity(0.6)),
-                                    ),
-                                    NeumorphicText(
-                                      categoryProvider.data[index].label,
-                                      style: const NeumorphicStyle(
-                                        color: Colors.white,
+                                          image: DecorationImage(
+                                            fit: BoxFit.cover,
+                                            image: CachedNetworkImageProvider(
+                                                categoryProvider
+                                                    .data[index].imageUrl),
+                                          ),
+                                        ),
                                       ),
-                                      textStyle: NeumorphicTextStyle(
-                                          fontSize: 25,
-                                          fontWeight: FontWeight.bold,
-                                          fontFamily: 'Orbitron'),
-                                    )
-                                  ],
+                                      Container(
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(20),
+                                            color: Colors.transparent
+                                                .withOpacity(0.6)),
+                                      ),
+                                      NeumorphicText(
+                                        categoryProvider.data[index].label,
+                                        style: const NeumorphicStyle(
+                                          color: Colors.white,
+                                        ),
+                                        textStyle: NeumorphicTextStyle(
+                                            fontSize: 25,
+                                            fontWeight: FontWeight.bold,
+                                            fontFamily: 'Orbitron'),
+                                      )
+                                    ],
+                                  ),
                                 ));
                           })
                     ],

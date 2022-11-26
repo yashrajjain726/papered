@@ -24,6 +24,15 @@ Color getcurrentThemeOppositeColor(BuildContext context) {
 }
 
 var category = [
+  "Abstract",
+  "Animals",
+  "Art",
+  "Computer",
+  "Films",
+  "Landscape",
+  "Light",
+  "Minimal",
+  "Sketched",
   "Nature",
   "Beach",
   "Dark",
@@ -31,7 +40,6 @@ var category = [
   "Beautiful",
   "Fish",
   "City",
-  "Landscape",
   "Car",
   "Movie",
   "Models",

@@ -10,6 +10,7 @@ import 'package:papered/providers/categorystate.dart';
 import 'package:papered/providers/explorestate.dart';
 import 'package:papered/providers/favoritestate.dart';
 import 'package:papered/providers/pagestate.dart';
+import 'package:papered/providers/searchstate.dart';
 import 'package:papered/providers/themestate.dart';
 import 'package:provider/provider.dart';
 
@@ -64,7 +65,8 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider(create: (context) => ThemeState()),
         ChangeNotifierProvider(create: (context) => FavoriteState()),
         ChangeNotifierProvider(create: (context) => ExploreState()),
-        ChangeNotifierProvider(create: (context) => CategoryState())
+        ChangeNotifierProvider(create: (context) => CategoryState()),
+        ChangeNotifierProvider(create: (context) => SearchState())
       ],
       builder: (context, _) {
         final themeState = Provider.of<ThemeState>(context);
