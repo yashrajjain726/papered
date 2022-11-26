@@ -62,6 +62,7 @@ class _CategoriesState extends State<Categories>
                                         BorderRadius.circular(20))),
                                 child: InkWell(
                                   onTap: () {
+                                    print("istapperd");
                                     MaterialPageRoute(
                                         builder: (context) => Search(
                                             query: categoryProvider

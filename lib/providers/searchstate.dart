@@ -9,4 +9,14 @@ class SearchState extends ChangeNotifier {
     page = number;
     notifyListeners();
   }
+
+  addSearchedDataResult(Photos? image) {
+    data.add(image!);
+    notifyListeners();
+  }
+
+  resetSearchData() {
+    data = [];
+    notifyListeners();
+  }
 }

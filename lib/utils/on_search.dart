@@ -1,6 +1,8 @@
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:papered/pages/search.dart';
+import 'package:papered/providers/searchstate.dart';
 import 'package:papered/utils/utils.dart';
+import 'package:provider/provider.dart';
 
 class OnSearch extends SearchDelegate<String> {
   @override
@@ -21,6 +23,7 @@ class OnSearch extends SearchDelegate<String> {
         padding: const EdgeInsets.all(15),
         onPressed: () {
           close(context, "result");
+          Provider.of<SearchState>(context, listen: false).resetSearchData();
         },
         icon: AnimatedIcon(
             icon: AnimatedIcons.menu_arrow, progress: transitionAnimation));
