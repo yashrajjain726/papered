@@ -31,7 +31,10 @@ class OnSearch extends SearchDelegate<String> {
 
   @override
   Widget buildResults(BuildContext context) {
-    return Search(query: query);
+    return Search(
+      query: query,
+      isFromCategoryPage: false,
+    );
   }
 
   @override

@@ -9,7 +9,9 @@ import 'package:provider/provider.dart';
 
 class Search extends StatefulWidget {
   final String query;
-  const Search({super.key, required this.query});
+  final bool isFromCategoryPage;
+  const Search(
+      {super.key, required this.query, required this.isFromCategoryPage});
 
   @override
   State<Search> createState() => _SearchState();
@@ -20,6 +22,7 @@ class _SearchState extends State<Search> {
   @override
   void initState() {
     super.initState();
+    Provider.of<SearchState>(context, listen: false).resetSearchData();
     var page = Provider.of<SearchState>(context, listen: false).page;
     _controller = ScrollController(
       initialScrollOffset: 5,
@@ -42,7 +45,6 @@ class _SearchState extends State<Search> {
             Provider.of<SearchState>(context, listen: false)
                 .addSearchedDataResult(element);
           })
-        // ignore: use_build_context_synchronously
         : ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: NeumorphicText(
             'Search Keyword not valid',
@@ -61,33 +63,46 @@ class _SearchState extends State<Search> {
   @override
   Widget build(BuildContext context) {
     var searchProvider = Provider.of<SearchState>(context, listen: true);
-    return Scaffold(
-        body: Column(
-      crossAxisAlignment: CrossAxisAlignment.end,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Expanded(
-            child: GridView.custom(
-          gridDelegate: SliverWovenGridDelegate.count(
-              crossAxisCount: 2,
-              mainAxisSpacing: 0,
-              crossAxisSpacing: 0,
-              pattern: const [
-                WovenGridTile(1),
-                WovenGridTile(
-                  5 / 7,
-                  crossAxisRatio: 0.9,
-                  alignment: AlignmentDirectional.centerEnd,
-                ),
-              ]),
-          childrenDelegate: SliverChildBuilderDelegate(
-              childCount: searchProvider.data.length, (context, index) {
-            return ImageGrid(data: searchProvider.data[index].src!.large2x);
-          }),
-          padding: const EdgeInsets.fromLTRB(12.0, 12.0, 12.0, 0.0),
-          controller: _controller,
-        )),
-      ],
-    ));
+    return SafeArea(
+      child: Scaffold(
+          appBar: widget.isFromCategoryPage
+              ? NeumorphicAppBar(
+                  title: NeumorphicText(
+                  widget.query,
+                  textStyle:
+                      NeumorphicTextStyle(fontFamily: 'Orbitron', fontSize: 24),
+                  style: NeumorphicStyle(
+                      color: Theme.of(context).textTheme.overline!.color),
+                ))
+              : null,
+          body: Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Expanded(
+                  child: GridView.custom(
+                gridDelegate: SliverWovenGridDelegate.count(
+                    crossAxisCount: 2,
+                    mainAxisSpacing: 0,
+                    crossAxisSpacing: 0,
+                    pattern: const [
+                      WovenGridTile(1),
+                      WovenGridTile(
+                        5 / 7,
+                        crossAxisRatio: 0.9,
+                        alignment: AlignmentDirectional.centerEnd,
+                      ),
+                    ]),
+                childrenDelegate: SliverChildBuilderDelegate(
+                    childCount: searchProvider.data.length, (context, index) {
+                  return ImageGrid(
+                      data: searchProvider.data[index].src!.large2x);
+                }),
+                padding: const EdgeInsets.fromLTRB(12.0, 12.0, 12.0, 0.0),
+                controller: _controller,
+              )),
+            ],
+          )),
+    );
   }
 }

@@ -19,9 +19,9 @@ class _CategoriesState extends State<Categories>
   final APIService apiService = APIService();
   @override
   void initState() {
-    super.initState();
     Provider.of<CategoryState>(context, listen: false)
         .updateCategoriesList(categories());
+    super.initState();
   }
 
   @override
@@ -43,69 +43,66 @@ class _CategoriesState extends State<Categories>
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Expanded(
-                  child: Stack(
-                    children: [
-                      GridView.builder(
-                          gridDelegate:
-                              const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 1,
-                            childAspectRatio: 3.6,
-                            crossAxisSpacing: 2,
-                            mainAxisSpacing: 4,
-                          ),
-                          itemCount: categoryProvider.data.length,
-                          itemBuilder: (context, index) {
-                            return Neumorphic(
-                                margin: const EdgeInsets.fromLTRB(10, 2, 10, 2),
-                                style: NeumorphicStyle(
-                                    boxShape: NeumorphicBoxShape.roundRect(
-                                        BorderRadius.circular(20))),
-                                child: InkWell(
-                                  onTap: () {
-                                    print("istapperd");
-                                    MaterialPageRoute(
-                                        builder: (context) => Search(
-                                            query: categoryProvider
-                                                .data[index].label));
-                                  },
-                                  child: Stack(
-                                    alignment: Alignment.center,
-                                    children: [
-                                      Container(
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(20),
-                                          image: DecorationImage(
-                                            fit: BoxFit.cover,
-                                            image: CachedNetworkImageProvider(
-                                                categoryProvider
-                                                    .data[index].imageUrl),
-                                          ),
-                                        ),
+                  child: GridView.builder(
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 1,
+                        childAspectRatio: 3.6,
+                        crossAxisSpacing: 2,
+                        mainAxisSpacing: 4,
+                      ),
+                      itemCount: categoryProvider.data.length,
+                      itemBuilder: (context, index) {
+                        return GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Search(
+                                          query: categoryProvider
+                                              .data[index].label,
+                                          isFromCategoryPage: true,
+                                        )));
+                          },
+                          child: Neumorphic(
+                              margin: const EdgeInsets.fromLTRB(10, 2, 10, 2),
+                              style: NeumorphicStyle(
+                                  boxShape: NeumorphicBoxShape.roundRect(
+                                      BorderRadius.circular(20))),
+                              child: Stack(
+                                alignment: Alignment.center,
+                                children: [
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(20),
+                                      image: DecorationImage(
+                                        fit: BoxFit.cover,
+                                        image: CachedNetworkImageProvider(
+                                            categoryProvider
+                                                .data[index].imageUrl),
                                       ),
-                                      Container(
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(20),
-                                            color: Colors.transparent
-                                                .withOpacity(0.6)),
-                                      ),
-                                      NeumorphicText(
-                                        categoryProvider.data[index].label,
-                                        style: const NeumorphicStyle(
-                                          color: Colors.white,
-                                        ),
-                                        textStyle: NeumorphicTextStyle(
-                                            fontSize: 25,
-                                            fontWeight: FontWeight.bold,
-                                            fontFamily: 'Orbitron'),
-                                      )
-                                    ],
+                                    ),
                                   ),
-                                ));
-                          })
-                    ],
-                  ),
+                                  Container(
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(20),
+                                        color: Colors.transparent
+                                            .withOpacity(0.6)),
+                                  ),
+                                  NeumorphicText(
+                                    categoryProvider.data[index].label,
+                                    style: const NeumorphicStyle(
+                                      color: Colors.white,
+                                    ),
+                                    textStyle: NeumorphicTextStyle(
+                                        fontSize: 25,
+                                        fontWeight: FontWeight.bold,
+                                        fontFamily: 'Orbitron'),
+                                  )
+                                ],
+                              )),
+                        );
+                      }),
                 ),
               ],
             )));
