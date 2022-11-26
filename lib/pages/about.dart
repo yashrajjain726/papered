@@ -12,92 +12,103 @@ class About extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var themeState = Provider.of<ThemeState>(context);
-    return Scaffold(
-        body: SingleChildScrollView(
-      child: Column(
+    return SafeArea(
+      child: Scaffold(
+          body: Column(
         children: [
-          ListTile(
-            title: NeumorphicText(
-              "Info",
-              textStyle: NeumorphicTextStyle(fontFamily: 'Orbitron'),
-              style: NeumorphicStyle(
-                  color: Theme.of(context).textTheme.overline!.color),
-            ),
+          const SizedBox(
+            height: 50,
           ),
-          Neumorphic(
-            style: NeumorphicStyle(color: getcurrentThemeColor(context)),
-            child: ListTile(
-              leading: const CircleAvatar(
-                radius: 35,
-                backgroundImage: NetworkImage(
-                    "https://avatars.githubusercontent.com/yashrajjain726"),
-              ),
-              title: NeumorphicText(
-                "Yashraj Jain",
-                textStyle: NeumorphicTextStyle(fontFamily: 'Orbitron'),
-                textAlign: TextAlign.start,
-                style: NeumorphicStyle(
-                    color: getcurrentThemeOppositeColor(context)),
-              ),
-              subtitle: NeumorphicText(
-                "App Developer",
-                textStyle: NeumorphicTextStyle(fontFamily: 'Orbitron'),
-                textAlign: TextAlign.start,
-                style: NeumorphicStyle(
-                    color: getcurrentThemeOppositeColor(context)),
-              ),
-              trailing: SizedBox(
-                width: 120.0,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    InkWell(
-                        onTap: () async {
-                          const url = "https://github.com/yashrajjain726";
-                          if (await canLaunch(url)) {
-                            await launch(url);
-                          }
-                        },
-                        child: NeumorphicIcon(
-                          Icons.code,
-                          size: 30,
-                          style: NeumorphicStyle(
-                              color: getcurrentThemeOppositeColor(context)),
-                        )),
-                    InkWell(
-                        onTap: () async {
-                          const url =
-                              "https://telegram.dog/yashrajjain726yashrajjain726";
-                          if (await canLaunch(url)) {
-                            await launch(url);
-                          }
-                        },
-                        child: NeumorphicIcon(
-                          Icons.message,
-                          size: 30,
-                          style: NeumorphicStyle(
-                              color: getcurrentThemeOppositeColor(context)),
-                        )),
-                    InkWell(
-                        onTap: () async {
-                          const url = "https://twitter.com/yashrajjain726";
-                          if (await canLaunch(url)) {
-                            await launch(url);
-                          }
-                        },
-                        child: NeumorphicIcon(
-                          Icons.rocket,
-                          size: 30,
-                          style: NeumorphicStyle(
-                              color: getcurrentThemeOppositeColor(context)),
-                        )),
-                  ],
+          const CircleAvatar(
+            radius: 100,
+            backgroundImage: NetworkImage(
+                "https://avatars.githubusercontent.com/yashrajjain726"),
+          ),
+          const SizedBox(
+            height: 30,
+          ),
+          NeumorphicText(
+            "Yashraj Jain",
+            textStyle:
+                NeumorphicTextStyle(fontFamily: 'Orbitron', fontSize: 20),
+            textAlign: TextAlign.start,
+            style:
+                NeumorphicStyle(color: getcurrentThemeOppositeColor(context)),
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          NeumorphicText(
+            "Software Engineer | Freelancer",
+            textStyle: NeumorphicTextStyle(fontFamily: 'Orbitron'),
+            textAlign: TextAlign.start,
+            style:
+                NeumorphicStyle(color: getcurrentThemeOppositeColor(context)),
+          ),
+          const SizedBox(
+            height: 100,
+          ),
+          NeumorphicText(
+            "You can reach me at below profile's",
+            textStyle:
+                NeumorphicTextStyle(fontFamily: 'Orbitron', fontSize: 10),
+            textAlign: TextAlign.start,
+            style:
+                NeumorphicStyle(color: getcurrentThemeOppositeColor(context)),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Neumorphic(
+                style: NeumorphicStyle(color: getcurrentThemeColor(context)),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: NeumorphicText(
+                    "Portfolio",
+                    textStyle: NeumorphicTextStyle(
+                      fontFamily: 'Orbitron',
+                      fontSize: 10,
+                    ),
+                    textAlign: TextAlign.start,
+                    style: NeumorphicStyle(
+                        color: getcurrentThemeOppositeColor(context)),
+                  ),
                 ),
               ),
-            ),
+              Neumorphic(
+                style: NeumorphicStyle(color: Colors.blue[900]),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: NeumorphicText(
+                    "LinkedIn",
+                    textStyle: NeumorphicTextStyle(
+                        fontFamily: 'Orbitron', fontSize: 10),
+                    textAlign: TextAlign.start,
+                    style: const NeumorphicStyle(color: Colors.white),
+                  ),
+                ),
+              ),
+              Neumorphic(
+                style: const NeumorphicStyle(color: Colors.redAccent),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: NeumorphicText(
+                    "Github",
+                    textStyle: NeumorphicTextStyle(
+                        fontFamily: 'Orbitron', fontSize: 10),
+                    textAlign: TextAlign.start,
+                    style: const NeumorphicStyle(color: Colors.white),
+                  ),
+                ),
+              ),
+            ],
           ),
         ],
-      ),
-    ));
+      )),
+    );
   }
 }
