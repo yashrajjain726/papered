@@ -66,18 +66,24 @@ class _ImageViewerState extends State<ImageViewer> {
                   setWallpaper(1);
                   Navigator.pop(context);
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      backgroundColor: getcurrentThemeOppositeColor(context),
                       content: NeumorphicText(
-                    'Setting Wallpaper',
-                    textStyle: NeumorphicTextStyle(
-                      fontFamily: 'Orbitron',
-                    ),
-                  )));
+                        'Setting Wallpaper',
+                        style: NeumorphicStyle(
+                            color: getcurrentThemeColor(context)),
+                        textStyle: NeumorphicTextStyle(
+                          fontFamily: 'Orbitron',
+                        ),
+                      )));
                 },
               ),
               ListTile(
                 title: NeumorphicText(
                   'Lock Screen',
                   textAlign: TextAlign.start,
+                  textStyle: NeumorphicTextStyle(
+                    fontFamily: 'Orbitron',
+                  ),
                   style: NeumorphicStyle(
                       color: getcurrentThemeOppositeColor(context)),
                 ),
@@ -90,12 +96,15 @@ class _ImageViewerState extends State<ImageViewer> {
                   setWallpaper(2);
                   Navigator.pop(context);
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      backgroundColor: getcurrentThemeOppositeColor(context),
                       content: NeumorphicText(
-                    'Setting Wallpaper',
-                    textStyle: NeumorphicTextStyle(
-                      fontFamily: 'Orbitron',
-                    ),
-                  )));
+                        'Setting Wallpaper',
+                        style: NeumorphicStyle(
+                            color: getcurrentThemeColor(context)),
+                        textStyle: NeumorphicTextStyle(
+                          fontFamily: 'Orbitron',
+                        ),
+                      )));
                 },
               ),
               ListTile(
@@ -117,12 +126,15 @@ class _ImageViewerState extends State<ImageViewer> {
                   setWallpaper(3);
                   Navigator.pop(context);
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      backgroundColor: getcurrentThemeOppositeColor(context),
                       content: NeumorphicText(
-                    'Setting Wallpaper',
-                    textStyle: NeumorphicTextStyle(
-                      fontFamily: 'Orbitron',
-                    ),
-                  )));
+                        'Setting Wallpaper',
+                        style: NeumorphicStyle(
+                            color: getcurrentThemeColor(context)),
+                        textStyle: NeumorphicTextStyle(
+                          fontFamily: 'Orbitron',
+                        ),
+                      )));
                 },
               ),
             ],
@@ -151,8 +163,15 @@ class _ImageViewerState extends State<ImageViewer> {
         print(e);
       }
     }
-    ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Wallpaper set successfully')));
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        backgroundColor: getcurrentThemeOppositeColor(context),
+        content: NeumorphicText(
+          'Wallpaper Set Successfully',
+          style: NeumorphicStyle(color: getcurrentThemeColor(context)),
+          textStyle: NeumorphicTextStyle(
+            fontFamily: 'Orbitron',
+          ),
+        )));
   }
 
   @override

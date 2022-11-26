@@ -4,6 +4,7 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:papered/models/imagemodel.dart';
 import 'package:papered/providers/searchstate.dart';
 import 'package:papered/services/api.dart';
+import 'package:papered/utils/utils.dart';
 import 'package:papered/widgets/image_grid.dart';
 import 'package:provider/provider.dart';
 
@@ -48,6 +49,7 @@ class _SearchState extends State<Search> {
         : ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: NeumorphicText(
             'Search Keyword not valid',
+            style: NeumorphicStyle(color: getcurrentThemeColor(context)),
             textStyle: NeumorphicTextStyle(
               fontFamily: 'Orbitron',
             ),
