@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:papered/pages/search.dart';
 import 'package:papered/providers/categorystate.dart';
@@ -76,9 +75,8 @@ class _CategoriesState extends State<Categories>
                                       borderRadius: BorderRadius.circular(20),
                                       image: DecorationImage(
                                         fit: BoxFit.cover,
-                                        image: CachedNetworkImageProvider(
-                                            categoryProvider
-                                                .data[index].imageUrl),
+                                        image: AssetImage(categoryProvider
+                                            .data[index].imageUrl),
                                       ),
                                     ),
                                   ),

@@ -45,30 +45,25 @@ var category = [
 List<CategoryModel> categories() {
   List<CategoryModel> myCategories = [];
 
-  myCategories.add(CategoryModel(category[0],
-      "https://images.pexels.com/photos/34950/pexels-photo.jpg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200"));
-  myCategories.add(CategoryModel(category[1],
-      "https://images.pexels.com/photos/1680140/pexels-photo-1680140.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200"));
-  myCategories.add(CategoryModel(category[2],
-      "https://images.pexels.com/photos/2449600/pexels-photo-2449600.png?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200"));
-  myCategories.add(CategoryModel(category[3],
-      "https://images.pexels.com/photos/695644/pexels-photo-695644.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200"));
-  myCategories.add(CategoryModel(category[4],
-      "https://images.pexels.com/photos/674010/pexels-photo-674010.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200"));
-  myCategories.add(CategoryModel(category[5],
-      "https://images.pexels.com/photos/2156311/pexels-photo-2156311.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200"));
-  myCategories.add(CategoryModel(category[6],
-      "https://images.pexels.com/photos/2129796/pexels-photo-2129796.png?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200"));
-  myCategories.add(CategoryModel(category[7],
-      "https://images.pexels.com/photos/167699/pexels-photo-167699.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200"));
-  myCategories.add(CategoryModel(category[8],
-      "https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200"));
-  myCategories.add(CategoryModel(category[9],
-      "https://images.pexels.com/photos/4473634/pexels-photo-4473634.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200"));
-  myCategories.add(CategoryModel(category[10],
-      "https://images.pexels.com/photos/160590/girls-beauty-makeup-dark-160590.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200"));
-  myCategories.add(CategoryModel(category[11],
-      "https://images.pexels.com/photos/53370/cary-grant-rosalind-russell-ralph-bellamy-actor-53370.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200"));
-
+  myCategories.add(CategoryModel(category[0], "assets/images/abstract.jpeg"));
+  myCategories.add(CategoryModel(category[1], "assets/images/animals.jpeg"));
+  myCategories.add(CategoryModel(category[2], "assets/images/art.jpeg"));
+  myCategories.add(CategoryModel(category[3], "assets/images/computer.jpeg"));
+  myCategories.add(CategoryModel(category[4], "assets/images/films.jpeg"));
+  myCategories.add(CategoryModel(category[5], "assets/images/landscape.jpeg"));
+  myCategories.add(CategoryModel(category[6], "assets/images/light.jpeg"));
+  myCategories.add(CategoryModel(category[7], "assets/images/minimal.jpeg"));
+  myCategories.add(CategoryModel(category[8], "assets/images/sketched.jpeg"));
+  myCategories.add(CategoryModel(category[9], "assets/images/nature.jpeg"));
+  myCategories.add(CategoryModel(category[10], "assets/images/beach.jpeg"));
+  myCategories.add(CategoryModel(category[11], "assets/images/dark.jpeg"));
+  myCategories.add(CategoryModel(category[12], "assets/images/black.jpeg"));
+  myCategories.add(CategoryModel(category[13], "assets/images/beautiful.jpeg"));
+  myCategories.add(CategoryModel(category[14], "assets/images/fish.jpeg"));
+  myCategories.add(CategoryModel(category[15], "assets/images/city.jpeg"));
+  myCategories.add(CategoryModel(category[16], "assets/images/car.jpeg"));
+  myCategories.add(CategoryModel(category[17], "assets/images/movie.jpeg"));
+  myCategories.add(CategoryModel(category[18], "assets/images/models.jpeg"));
+  myCategories.add(CategoryModel(category[19], "assets/images/actors.jpeg"));
   return myCategories;
 }
