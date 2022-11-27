@@ -1,6 +1,10 @@
+import 'dart:async';
+
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:papered/models/categorymodel.dart';
+import 'package:papered/pages/home.dart';
 
 const platform = MethodChannel('com.yashrajjaiin.papered/gallery');
 
@@ -66,4 +70,23 @@ List<CategoryModel> categories() {
   myCategories.add(CategoryModel(category[18], "assets/images/models.jpeg"));
   myCategories.add(CategoryModel(category[19], "assets/images/actors.jpeg"));
   return myCategories;
+}
+
+Future<bool> checkInternet() async {
+  var connectivityResult = await Connectivity().checkConnectivity();
+  if (connectivityResult == ConnectivityResult.mobile ||
+      connectivityResult == ConnectivityResult.wifi) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+Future<void> initTimer(context) async {
+  if (await checkInternet()) {
+    Timer(const Duration(seconds: 4), () async {
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (builder) => const Home()));
+    });
+  }
 }

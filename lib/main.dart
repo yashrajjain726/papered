@@ -1,9 +1,16 @@
+import 'dart:async';
+
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:papered/pages/checkconnection.dart';
+import 'package:papered/pages/home.dart';
+import 'package:papered/pages/no_internet.dart';
 import 'package:papered/pages/splash.dart';
 import 'package:papered/providers/categorystate.dart';
 import 'package:papered/providers/explorestate.dart';
@@ -11,11 +18,13 @@ import 'package:papered/providers/favoritestate.dart';
 import 'package:papered/providers/pagestate.dart';
 import 'package:papered/providers/searchstate.dart';
 import 'package:papered/providers/themestate.dart';
+import 'package:papered/utils/utils.dart';
 import 'package:provider/provider.dart';
 
 const _kTestingCrashlytics = true;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   await FlutterDownloader.initialize(debug: false);
   await Firebase.initializeApp();
   FlutterError.onError = (errorDetails) {
@@ -54,6 +63,7 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
     _initializeCrashlytics = _initializeFlutterCrashlytics();
+    initTimer(context);
   }
 
   @override
@@ -65,7 +75,7 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider(create: (context) => FavoriteState()),
         ChangeNotifierProvider(create: (context) => ExploreState()),
         ChangeNotifierProvider(create: (context) => CategoryState()),
-        ChangeNotifierProvider(create: (context) => SearchState())
+        ChangeNotifierProvider(create: (context) => SearchState()),
       ],
       builder: (context, _) {
         final themeState = Provider.of<ThemeState>(context);
@@ -92,7 +102,7 @@ class _MyAppState extends State<MyApp> {
           darkTheme: themeState.getDarkTheme(),
           initialRoute: '/',
           routes: {
-            '/': (context) => const Splash(),
+            '/': (context) => const CheckConnection(),
           },
         );
       },

@@ -43,17 +43,16 @@ class _FavouriteState extends State<Favourite> {
                     children: [
                       Expanded(
                           child: GridView.custom(
-                        gridDelegate: SliverWovenGridDelegate.count(
-                            crossAxisCount: 2,
-                            mainAxisSpacing: 0,
-                            crossAxisSpacing: 0,
+                        gridDelegate: SliverQuiltedGridDelegate(
+                            crossAxisCount: 4,
+                            mainAxisSpacing: 4,
+                            crossAxisSpacing: 4,
+                            repeatPattern: QuiltedGridRepeatPattern.inverted,
                             pattern: const [
-                              WovenGridTile(1),
-                              WovenGridTile(
-                                5 / 7,
-                                crossAxisRatio: 0.9,
-                                alignment: AlignmentDirectional.centerEnd,
-                              ),
+                              QuiltedGridTile(2, 2),
+                              QuiltedGridTile(1, 1),
+                              QuiltedGridTile(1, 1),
+                              QuiltedGridTile(1, 2),
                             ]),
                         childrenDelegate: SliverChildBuilderDelegate(
                             childCount: favouriteProvider.favouriteList.length,
