@@ -37,9 +37,11 @@ class _ImageViewerState extends State<ImageViewer> {
       final result =
           await ImageGallerySaver.saveImage(Uint8List.fromList(response.data));
       if (result['isSuccess']) {
+        // ignore: use_build_context_synchronously
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: NeumorphicText(
           'Image Saved in local storage',
+          // ignore: use_build_context_synchronously
           style: NeumorphicStyle(color: getcurrentThemeColor(context)),
           textStyle: NeumorphicTextStyle(
             fontFamily: 'Orbitron',
@@ -234,10 +236,13 @@ class _ImageViewerState extends State<ImageViewer> {
         print(e);
       }
     }
+    // ignore: use_build_context_synchronously
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        // ignore: use_build_context_synchronously
         backgroundColor: getcurrentThemeOppositeColor(context),
         content: NeumorphicText(
           'Wallpaper Set Successfully',
+          // ignore: use_build_context_synchronously
           style: NeumorphicStyle(color: getcurrentThemeColor(context)),
           textStyle: NeumorphicTextStyle(
             fontFamily: 'Orbitron',

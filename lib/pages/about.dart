@@ -1,17 +1,11 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
-import 'package:papered/providers/themestate.dart';
 import 'package:papered/utils/utils.dart';
-import 'package:provider/provider.dart';
-
-import 'package:url_launcher/url_launcher.dart';
 
 class About extends StatelessWidget {
   const About({super.key});
 
   @override
   Widget build(BuildContext context) {
-    var themeState = Provider.of<ThemeState>(context);
     return SafeArea(
       child: Scaffold(
           body: Column(
@@ -64,7 +58,8 @@ class About extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Neumorphic(
-                style: NeumorphicStyle(color: getcurrentThemeColor(context)),
+                style: NeumorphicStyle(
+                    color: getcurrentThemeOppositeColor(context)),
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: NeumorphicText(
@@ -74,8 +69,8 @@ class About extends StatelessWidget {
                       fontSize: 10,
                     ),
                     textAlign: TextAlign.start,
-                    style: NeumorphicStyle(
-                        color: getcurrentThemeOppositeColor(context)),
+                    style:
+                        NeumorphicStyle(color: getcurrentThemeColor(context)),
                   ),
                 ),
               ),

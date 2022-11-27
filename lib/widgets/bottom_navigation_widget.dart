@@ -1,8 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:papered/providers/pagestate.dart';
 import 'package:provider/provider.dart';
-import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
 class BottomNavigationWidget extends StatefulWidget {
   final PageController controller;

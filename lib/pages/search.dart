@@ -1,7 +1,6 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:papered/models/imagemodel.dart';
 import 'package:papered/providers/searchstate.dart';
 import 'package:papered/services/api.dart';
 import 'package:papered/utils/utils.dart';
@@ -40,15 +39,20 @@ class _SearchState extends State<Search> {
   fetchPhotosFromAPI(page) async {
     var response = await APIService()
         .getRandomWallpaper("20", widget.query, page.toString());
-    print(widget.query);
+    if (kDebugMode) {
+      print(widget.query);
+    }
     response.photos!.isNotEmpty
+        // ignore: avoid_function_literals_in_foreach_calls
         ? response.photos!.forEach((element) {
             Provider.of<SearchState>(context, listen: false)
                 .addSearchedDataResult(element);
           })
+        // ignore: use_build_context_synchronously
         : ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: NeumorphicText(
             'Search Keyword not valid',
+            // ignore: use_build_context_synchronously
             style: NeumorphicStyle(color: getcurrentThemeColor(context)),
             textStyle: NeumorphicTextStyle(
               fontFamily: 'Orbitron',

@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
-import 'package:papered/models/categorymodel.dart';
 import 'package:papered/pages/search.dart';
 import 'package:papered/providers/categorystate.dart';
 import 'package:papered/services/api.dart';

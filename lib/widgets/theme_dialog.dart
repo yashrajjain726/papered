@@ -39,7 +39,7 @@ class _ThemeDialogState extends State<ThemeDialog> {
                 title: Text(
                   themeModeText[index],
                   textAlign: TextAlign.start,
-                  style: TextStyle(fontFamily: 'Orbitron'),
+                  style: const TextStyle(fontFamily: 'Orbitron'),
                 ),
                 selected: index == themeState.currentThemeIndex,
                 onTap: () {

@@ -2,8 +2,6 @@ import 'dart:math';
 
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:papered/models/imagemodel.dart';
-import 'package:papered/providers/categorystate.dart';
 import 'package:papered/providers/explorestate.dart';
 import 'package:papered/services/api.dart';
 import 'package:papered/utils/on_search.dart';
@@ -52,9 +50,10 @@ class _ExploreState extends State<Explore> with AutomaticKeepAliveClientMixin {
   getDataFromAPI(category) async {
     var images = await apiService.getRandomWallpaper("20", category,
         Provider.of<ExploreState>(context, listen: false).page.toString());
-    images.photos!.forEach((image) {
+    for (var image in images.photos!) {
+      // ignore: use_build_context_synchronously
       Provider.of<ExploreState>(context, listen: false).addDatatoExplore(image);
-    });
+    }
   }
 
   @override

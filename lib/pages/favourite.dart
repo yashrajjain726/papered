@@ -2,9 +2,7 @@ import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:papered/providers/favoritestate.dart';
 import 'package:papered/widgets/image_grid.dart';
-import 'package:papered/widgets/image_viewer.dart';
 import 'package:provider/provider.dart';
-import 'package:transparent_image/transparent_image.dart';
 
 class Favourite extends StatefulWidget {
   const Favourite({super.key});

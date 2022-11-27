@@ -53,6 +53,7 @@ class OnSearch extends SearchDelegate<String> {
   ThemeData appBarTheme(BuildContext context) {
     return ThemeData(
         hintColor: getcurrentThemeOppositeColor(context),
+        // ignore: deprecated_member_use
         accentTextTheme: Theme.of(context).textTheme,
         bottomAppBarColor: getcurrentThemeColor(context),
         textTheme: TextTheme(
@@ -68,6 +69,7 @@ class OnSearch extends SearchDelegate<String> {
                 getcurrentThemeOppositeColor(context).withOpacity(0.5),
             selectionHandleColor: getcurrentThemeOppositeColor(context)),
         appBarTheme: AppBarTheme(
+          // ignore: deprecated_member_use
           textTheme: TextTheme(
               headline6: TextStyle(
                   color: getcurrentThemeOppositeColor(
