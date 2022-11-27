@@ -1,11 +1,14 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:flutter_wallpaper_manager/flutter_wallpaper_manager.dart';
+import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:papered/providers/favoritestate.dart';
 import 'package:papered/utils/preferences.dart';
 import 'package:papered/utils/utils.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 import 'package:transparent_image/transparent_image.dart';
 
@@ -18,10 +21,78 @@ class ImageViewer extends StatefulWidget {
 }
 
 class _ImageViewerState extends State<ImageViewer> {
-  double angle = 0.0;
+  @override
+  void initState() {
+    super.initState();
+    checkAndRequestPermission();
+  }
+
   Preference preference = Preference();
 
-  downloadImage() async {}
+  downloadCurrentImage() async {
+    var status = await Permission.storage.status.isGranted;
+    if (status) {
+      var response = await Dio().get(widget.image,
+          options: Options(responseType: ResponseType.bytes));
+      final result =
+          await ImageGallerySaver.saveImage(Uint8List.fromList(response.data));
+      if (result['isSuccess']) {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: NeumorphicText(
+          'Image Saved in local storage',
+          style: NeumorphicStyle(color: getcurrentThemeColor(context)),
+          textStyle: NeumorphicTextStyle(
+            fontFamily: 'Orbitron',
+          ),
+        )));
+      }
+    }
+    if (await Permission.storage.isDenied) {
+      checkAndRequestPermission();
+    }
+  }
+
+  checkAndRequestPermission() async {
+    Map<Permission, PermissionStatus> statuses =
+        await [Permission.storage].request();
+    final info = statuses[Permission.storage];
+    if (info == PermissionStatus.permanentlyDenied) {
+      showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              contentPadding: const EdgeInsets.all(15),
+              shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(10.0))),
+              content: NeumorphicText("Open app setting to grant access.",
+                  textAlign: TextAlign.start,
+                  style: NeumorphicStyle(
+                      color: getcurrentThemeOppositeColor(context))),
+              actions: <Widget>[
+                TextButton(
+                  child: NeumorphicText('OK',
+                      textAlign: TextAlign.start,
+                      style: NeumorphicStyle(
+                          color: getcurrentThemeOppositeColor(context))),
+                  onPressed: () async {
+                    Navigator.pop(context);
+                    openAppSettings();
+                  },
+                ),
+                TextButton(
+                  child: NeumorphicText('Close',
+                      textAlign: TextAlign.start,
+                      style: NeumorphicStyle(
+                          color: getcurrentThemeOppositeColor(context))),
+                  onPressed: () async {
+                    Navigator.pop(context);
+                  },
+                ),
+              ],
+            );
+          });
+    }
+  }
 
   @override
   void dispose() {
@@ -189,7 +260,7 @@ class _ImageViewerState extends State<ImageViewer> {
                   onInteractionUpdate: (ScaleUpdateDetails details) {},
                   onInteractionEnd: (ScaleEndDetails details) {},
                   child: Transform.rotate(
-                    angle: angle,
+                    angle: 0,
                     child: FadeInImage.memoryNetwork(
                       placeholder: kTransparentImage,
                       image: widget.image,
@@ -203,7 +274,7 @@ class _ImageViewerState extends State<ImageViewer> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           NeumorphicButton(
-            onPressed: downloadImage,
+            onPressed: downloadCurrentImage,
             padding: const EdgeInsets.all(15),
             style: const NeumorphicStyle(boxShape: NeumorphicBoxShape.circle()),
             child: NeumorphicIcon(

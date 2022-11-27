@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:papered/pages/home.dart';
+import 'package:papered/pages/splash.dart';
 import 'package:papered/providers/categorystate.dart';
 import 'package:papered/providers/explorestate.dart';
 import 'package:papered/providers/favoritestate.dart';
@@ -92,7 +93,9 @@ class _MyAppState extends State<MyApp> {
           ),
           darkTheme: themeState.getDarkTheme(),
           initialRoute: '/',
-          routes: {'/': (context) => const Home()},
+          routes: {
+            '/': (context) => const Splash(),
+          },
         );
       },
     );

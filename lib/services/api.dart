@@ -17,12 +17,10 @@ class APIService {
       'query': keywords,
       'page': pageNo
     };
-    // String apiKey = await getKey();
-    final response = await http
-        .get(Uri.https('api.pexels.com', 'v1/search', params), headers: {
-      "Authorization":
-          "563492ad6f91700001000001a64a4f897e6d455899c27d3fabf4285c"
-    });
+    String apiKey = await getKey();
+    final response = await http.get(
+        Uri.https('api.pexels.com', 'v1/search', params),
+        headers: {"Authorization": apiKey});
 
     if (response.statusCode == 200) {
       return ImageModel.fromJson(jsonDecode(response.body));
