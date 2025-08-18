@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:flutter_neumorphic_plus/flutter_neumorphic.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:papered/providers/explorestate.dart';
 import 'package:papered/services/api.dart';

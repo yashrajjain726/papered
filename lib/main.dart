@@ -4,8 +4,7 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_downloader/flutter_downloader.dart';
-import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:flutter_neumorphic_plus/flutter_neumorphic.dart';
 import 'package:papered/pages/checkconnection.dart';
 import 'package:papered/providers/categorystate.dart';
 import 'package:papered/providers/explorestate.dart';
@@ -20,7 +19,6 @@ const _kTestingCrashlytics = true;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await FlutterDownloader.initialize(debug: false);
   await Firebase.initializeApp();
   FlutterError.onError = (errorDetails) {
     FirebaseCrashlytics.instance.recordFlutterFatalError(errorDetails);

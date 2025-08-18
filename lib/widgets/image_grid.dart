@@ -1,4 +1,4 @@
-import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:flutter_neumorphic_plus/flutter_neumorphic.dart';
 import 'package:papered/widgets/image_viewer.dart';
 import 'package:transparent_image/transparent_image.dart';
 

@@ -2,9 +2,9 @@ import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
-import 'package:flutter_neumorphic/flutter_neumorphic.dart';
-import 'package:flutter_wallpaper_manager/flutter_wallpaper_manager.dart';
-import 'package:image_gallery_saver/image_gallery_saver.dart';
+import 'package:flutter_neumorphic_plus/flutter_neumorphic.dart';
+import 'package:wallpaper_manager_flutter/wallpaper_manager_flutter.dart';
+import 'package:gal/gal.dart';
 import 'package:papered/providers/favoritestate.dart';
 import 'package:papered/utils/preferences.dart';
 import 'package:papered/utils/utils.dart';
@@ -34,9 +34,8 @@ class _ImageViewerState extends State<ImageViewer> {
     if (status) {
       var response = await Dio().get(widget.image,
           options: Options(responseType: ResponseType.bytes));
-      final result =
-          await ImageGallerySaver.saveImage(Uint8List.fromList(response.data));
-      if (result['isSuccess']) {
+      try {
+        await Gal.putImageBytes(Uint8List.fromList(response.data));
         // ignore: use_build_context_synchronously
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: NeumorphicText(
@@ -47,6 +46,10 @@ class _ImageViewerState extends State<ImageViewer> {
             fontFamily: 'Orbitron',
           ),
         )));
+      } catch (e) {
+        if (kDebugMode) {
+          print('Error saving image: $e');
+        }
       }
     }
     if (await Permission.storage.isDenied) {
@@ -220,20 +223,25 @@ class _ImageViewerState extends State<ImageViewer> {
 
   Future<void> setWallpaper(int type) async {
     var file = await DefaultCacheManager().getSingleFile(widget.image);
+    final wallpaperManager = WallpaperManagerFlutter();
     try {
+      bool result = false;
       if (type == 1) {
-        await WallpaperManager.setWallpaperFromFile(
-            file.path, WallpaperManager.HOME_SCREEN);
+        result = await wallpaperManager.setWallpaper(
+            file, WallpaperManagerFlutter.homeScreen);
       } else if (type == 2) {
-        await WallpaperManager.setWallpaperFromFile(
-            file.path, WallpaperManager.LOCK_SCREEN);
+        result = await wallpaperManager.setWallpaper(
+            file, WallpaperManagerFlutter.lockScreen);
       } else if (type == 3) {
-        await WallpaperManager.setWallpaperFromFile(
-            file.path, WallpaperManager.BOTH_SCREEN);
+        result = await wallpaperManager.setWallpaper(
+            file, WallpaperManagerFlutter.bothScreens);
+      }
+      if (result && kDebugMode) {
+        print('Wallpaper set successfully! 🎉');
       }
     } on PlatformException catch (e) {
       if (kDebugMode) {
-        print(e);
+        print('Error setting wallpaper: $e ❌');
       }
     }
     // ignore: use_build_context_synchronously
