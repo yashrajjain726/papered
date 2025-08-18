@@ -59,6 +59,7 @@ class _ImageViewerState extends State<ImageViewer> {
         await [Permission.storage].request();
     final info = statuses[Permission.storage];
     if (info == PermissionStatus.permanentlyDenied) {
+      if (!mounted) return;
       showDialog(
           context: context,
           builder: (context) {
