@@ -6,9 +6,9 @@ class About extends StatelessWidget {
   const About({super.key});
 
   Future<void> _launchUrl(url) async {
-    final Uri _url = Uri.parse(url);
-    if (!await launchUrl(_url)) {
-      throw 'Could not launch $_url';
+    final Uri url0 = Uri.parse(url);
+    if (!await launchUrl(url0)) {
+      throw 'Could not launch $url0';
     }
   }
 

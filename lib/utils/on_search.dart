@@ -45,7 +45,7 @@ class OnSearch extends SearchDelegate<String> {
       textStyle: NeumorphicTextStyle(fontFamily: 'Orbitron'),
       textAlign: TextAlign.start,
       style:
-          NeumorphicStyle(color: Theme.of(context).textTheme.overline!.color),
+          NeumorphicStyle(color: Theme.of(context).textTheme.labelSmall!.color),
     ));
   }
 
@@ -53,12 +53,9 @@ class OnSearch extends SearchDelegate<String> {
   ThemeData appBarTheme(BuildContext context) {
     return ThemeData(
         hintColor: getcurrentThemeOppositeColor(context),
-        // ignore: deprecated_member_use
-        accentTextTheme: Theme.of(context).textTheme,
-        bottomAppBarColor: getcurrentThemeColor(context),
         textTheme: TextTheme(
-            headline6: TextStyle(color: getcurrentThemeOppositeColor(context))),
-        backgroundColor: getcurrentThemeColor(context),
+            titleLarge:
+                TextStyle(color: getcurrentThemeOppositeColor(context))),
         scaffoldBackgroundColor: getcurrentThemeColor(context),
         indicatorColor: getcurrentThemeOppositeColor(context),
         inputDecorationTheme: InputDecorationTheme(
@@ -66,19 +63,12 @@ class OnSearch extends SearchDelegate<String> {
             suffixIconColor: getcurrentThemeOppositeColor(context)),
         textSelectionTheme: TextSelectionThemeData(
             selectionColor:
-                getcurrentThemeOppositeColor(context).withOpacity(0.5),
+                getcurrentThemeOppositeColor(context).withValues(alpha: 0.5),
             selectionHandleColor: getcurrentThemeOppositeColor(context)),
         appBarTheme: AppBarTheme(
-          // ignore: deprecated_member_use
-          textTheme: TextTheme(
-              headline6: TextStyle(
-                  color: getcurrentThemeOppositeColor(
-            context,
-          ))),
+          titleTextStyle:
+              TextStyle(color: getcurrentThemeOppositeColor(context)),
           iconTheme: Theme.of(context).iconTheme,
-          titleTextStyle: TextStyle(
-              color: getcurrentThemeOppositeColor(context),
-              backgroundColor: getcurrentThemeColor(context)),
           backgroundColor: getcurrentThemeColor(context),
         ));
   }

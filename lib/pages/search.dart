@@ -78,7 +78,7 @@ class _SearchState extends State<Search> {
                   textStyle:
                       NeumorphicTextStyle(fontFamily: 'Orbitron', fontSize: 24),
                   style: NeumorphicStyle(
-                      color: Theme.of(context).textTheme.overline!.color),
+                      color: Theme.of(context).textTheme.labelSmall!.color),
                 ))
               : null,
           body: Column(

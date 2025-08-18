@@ -74,7 +74,7 @@ class _ExploreState extends State<Explore> with AutomaticKeepAliveClientMixin {
               textStyle:
                   NeumorphicTextStyle(fontFamily: 'Orbitron', fontSize: 24),
               style: NeumorphicStyle(
-                  color: Theme.of(context).textTheme.overline!.color),
+                  color: Theme.of(context).textTheme.labelSmall!.color),
             ),
             actions: [
               GestureDetector(

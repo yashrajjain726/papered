@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:papered/pages/search.dart';
 import 'package:papered/providers/categorystate.dart';
@@ -36,7 +35,7 @@ class _CategoriesState extends State<Categories>
               textStyle:
                   NeumorphicTextStyle(fontFamily: 'Orbitron', fontSize: 24),
               style: NeumorphicStyle(
-                  color: Theme.of(context).textTheme.overline!.color),
+                  color: Theme.of(context).textTheme.labelSmall!.color),
             )),
             body: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -85,7 +84,7 @@ class _CategoriesState extends State<Categories>
                                     decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(20),
                                         color: Colors.transparent
-                                            .withOpacity(0.6)),
+                                            .withValues(alpha: 0.5)),
                                   ),
                                   NeumorphicText(
                                     categoryProvider.data[index].label,

@@ -23,7 +23,7 @@ class ThemeState extends ChangeNotifier {
 
   NeumorphicThemeData getDarkTheme() {
     return const NeumorphicThemeData(
-      textTheme: TextTheme(overline: TextStyle(color: Colors.white)),
+      textTheme: TextTheme(labelSmall: TextStyle(color: Colors.white)),
       baseColor: Colors.black45,
       depth: 8,
       defaultTextColor: Colors.white,

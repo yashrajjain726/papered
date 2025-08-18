@@ -218,17 +218,16 @@ class _ImageViewerState extends State<ImageViewer> {
   }
 
   Future<void> setWallpaper(int type) async {
-    bool result;
     var file = await DefaultCacheManager().getSingleFile(widget.image);
     try {
       if (type == 1) {
-        result = await WallpaperManager.setWallpaperFromFile(
+        await WallpaperManager.setWallpaperFromFile(
             file.path, WallpaperManager.HOME_SCREEN);
       } else if (type == 2) {
-        result = await WallpaperManager.setWallpaperFromFile(
+        await WallpaperManager.setWallpaperFromFile(
             file.path, WallpaperManager.LOCK_SCREEN);
       } else if (type == 3) {
-        result = await WallpaperManager.setWallpaperFromFile(
+        await WallpaperManager.setWallpaperFromFile(
             file.path, WallpaperManager.BOTH_SCREEN);
       }
     } on PlatformException catch (e) {

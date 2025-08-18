@@ -35,7 +35,7 @@ class _FavouriteState extends State<Favourite> {
               textStyle:
                   NeumorphicTextStyle(fontFamily: 'Orbitron', fontSize: 24),
               style: NeumorphicStyle(
-                  color: Theme.of(context).textTheme.overline!.color),
+                  color: Theme.of(context).textTheme.labelSmall!.color),
             )),
             body: favouriteProvider.favouriteList.isEmpty
                 ? _noFavouriteContainer(context)
@@ -75,7 +75,7 @@ class _FavouriteState extends State<Favourite> {
       textAlign: TextAlign.start,
       textStyle: NeumorphicTextStyle(fontFamily: 'Orbitron'),
       style:
-          NeumorphicStyle(color: Theme.of(context).textTheme.overline!.color),
+          NeumorphicStyle(color: Theme.of(context).textTheme.labelSmall!.color),
     ));
   }
 }

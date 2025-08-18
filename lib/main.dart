@@ -1,17 +1,12 @@
 import 'dart:async';
 
-import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:papered/pages/checkconnection.dart';
-import 'package:papered/pages/home.dart';
-import 'package:papered/pages/no_internet.dart';
-import 'package:papered/pages/splash.dart';
 import 'package:papered/providers/categorystate.dart';
 import 'package:papered/providers/explorestate.dart';
 import 'package:papered/providers/favoritestate.dart';
@@ -45,7 +40,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  late Future<void> _initializeCrashlytics;
   static FirebaseAnalytics analytics = FirebaseAnalytics.instance;
   static FirebaseAnalyticsObserver observer =
       FirebaseAnalyticsObserver(analytics: analytics);
@@ -62,7 +56,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    _initializeCrashlytics = _initializeFlutterCrashlytics();
+    _initializeFlutterCrashlytics();
     initTimer(context);
   }
 
