@@ -3,7 +3,7 @@ import 'package:papered/widgets/image_viewer.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 class ImageGrid extends StatelessWidget {
-  final data;
+  final String data;
   const ImageGrid({super.key, required this.data});
 
   @override

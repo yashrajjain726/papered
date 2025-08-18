@@ -129,7 +129,7 @@ class _ExploreState extends State<Explore> with AutomaticKeepAliveClientMixin {
                     ]),
                 childrenDelegate: SliverChildBuilderDelegate(
                     childCount: exploreState.data.length, (context, index) {
-                  return ImageGrid(data: exploreState.data[index].src!.large2x);
+                  return ImageGrid(data: exploreState.data[index].src!.large2x!);
                 }),
                 padding: const EdgeInsets.fromLTRB(12.0, 12.0, 12.0, 0.0),
                 controller: controller,

@@ -102,7 +102,7 @@ class _SearchState extends State<Search> {
                 childrenDelegate: SliverChildBuilderDelegate(
                     childCount: searchProvider.data.length, (context, index) {
                   return ImageGrid(
-                      data: searchProvider.data[index].src!.large2x);
+                      data: searchProvider.data[index].src!.large2x!);
                 }),
                 padding: const EdgeInsets.fromLTRB(12.0, 12.0, 12.0, 0.0),
                 controller: _controller,
